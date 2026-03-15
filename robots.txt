@@ -1,9 +1,0 @@
-# robots.txt — Biomedionics
-# https://biomedionics.vercel.app/
-
-# Allow all search engines to crawl everything
-User-agent: *
-Allow: /
-
-# Sitemap location
-Sitemap: https://biomedionics.vercel.app/sitemap.xml
