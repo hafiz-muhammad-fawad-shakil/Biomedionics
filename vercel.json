@@ -1,24 +1,24 @@
 {
-  "routes": [
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "rewrites": [
     {
-      "src": "/sitemap.xml",
-      "dest": "/sitemap.xml",
-      "headers": {
-        "Content-Type": "application/xml; charset=utf-8",
-        "Cache-Control": "public, max-age=3600"
-      }
+      "source": "/((?!sitemap\\.xml$|robots\\.txt$|favicon\\.png$|favicon\\.ico$).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml" }
+      ]
     },
     {
-      "src": "/robots.txt",
-      "dest": "/robots.txt",
-      "headers": {
-        "Content-Type": "text/plain; charset=utf-8",
-        "Cache-Control": "public, max-age=3600"
-      }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/robots.txt", 
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain" }
+      ]
     }
   ]
 }
