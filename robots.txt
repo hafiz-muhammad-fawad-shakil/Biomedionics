@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://biomedionics.vercel.app/sitemap.xml
+Sitemap: https://biomedionics.vercel.app/sitemap_html.xml
