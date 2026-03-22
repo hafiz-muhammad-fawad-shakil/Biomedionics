@@ -627,7 +627,7 @@ biomedionics@gmail.com
            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=biomedionics@gmail.com">
   Email Support
 </a>
-      <!DOCTYPE html>
+     <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -640,11 +640,11 @@ biomedionics@gmail.com
   body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #000; /* optional to see transparency effect */
+    background: #000; /* optional */
   }
 
   footer {
-    background: transparent; /* transparent background */
+    background: transparent;
     color: #fff;
     padding: 40px 20px 20px;
   }
@@ -654,15 +654,11 @@ biomedionics@gmail.com
     margin: auto;
   }
 
+  /* 3 columns in one row */
   .footer-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 30px;
-  }
-
-  .footer-col {
-    min-width: 200px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
   }
 
   .footer-col-title {
@@ -699,10 +695,11 @@ biomedionics@gmail.com
     color: #aaa;
   }
 
-  /* Responsive */
+  /* Mobile responsive */
   @media (max-width: 768px) {
     .footer-content {
-      flex-direction: column;
+      grid-template-columns: 1fr; /* stack vertically on small screens */
+      text-align: center;
     }
   }
 </style>
@@ -715,8 +712,8 @@ biomedionics@gmail.com
 
     <div class="footer-content">
 
-      <!-- Contact -->
-      <div class="footer-col">
+      <!-- Column 1: Contact -->
+      <div>
         <div class="footer-col-title">Contact</div>
         <div class="footer-links">
           <a href="tel:+923474281701">
@@ -725,8 +722,8 @@ biomedionics@gmail.com
         </div>
       </div>
 
-      <!-- Company -->
-      <div class="footer-col">
+      <!-- Column 2: Company -->
+      <div>
         <div class="footer-col-title">Company</div>
         <div class="footer-links">
           <a onclick="goPage('about')">About Us</a>
@@ -736,8 +733,8 @@ biomedionics@gmail.com
         </div>
       </div>
 
-      <!-- Social -->
-      <div class="footer-col">
+      <!-- Column 3: Social -->
+      <div>
         <div class="footer-col-title">Follow Us</div>
         <div class="footer-links social-icons">
           <a href="https://www.instagram.com/" target="_blank">
@@ -755,6 +752,18 @@ biomedionics@gmail.com
       </div>
 
     </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom">
+      <div>© 2026 Biomedionics. All rights reserved.</div>
+      <div>Designed with precision</div>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
 
     <!-- Bottom Section -->
     <div class="footer-bottom">
