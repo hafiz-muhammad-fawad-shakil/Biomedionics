@@ -591,106 +591,196 @@ input,select,textarea{font-family:inherit;outline:none}
       </div>
     </div>
   </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- FOOTER for home -->
-<footer class="footer">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b1220; /* dark background */
+  }
+
+  footer {
+    background: transparent;
+    color: #fff;
+    padding: 40px 20px 20px;
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: auto;
+  }
+
+  /* ✅ 3 columns in one row */
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    align-items: start;
+  }
+
+  .footer-col-title {
+    font-weight: bold;
+    margin-bottom: 12px;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+
+  .footer-links a {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: 0.3s;
+    font-size: 14px;
+  }
+
+  .footer-links a:hover {
+    color: #00bcd4;
+  }
+
+  .footer-brand p {
+    color: #ccc;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .footer-brand a {
+    color: #ccc;
+    text-decoration: none;
+  }
+
+  .footer-brand a:hover {
+    color: #00bcd4;
+  }
+
+  .social-icons a i {
+    margin-right: 8px;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #333;
+    margin-top: 25px;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: #aaa;
+  }
+
+  /* ✅ Mobile responsive */
+  @media (max-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+      gap: 8px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<footer>
   <div class="footer-inner">
 
-    <div class="footer-container">
+    <div class="footer-content">
 
-      <div class="footer-content">
-
-        <!-- Column 1: Brand + Contact -->
-        <div class="footer-brand">
-          <div style="font-size:22px;font-weight:800;color:#fff">Biomedionics</div>
-
-          <p>
-            Advanced medical devices engineered for precision diagnostics and real-time clinical monitoring.
-            Trusted by healthcare professionals across Pakistan.
-          </p>
-
-          <div style="margin-top:16px;font-size:13px;color:rgba(255,255,255,.7)">
-            📍 
-            <a href="https://www.google.com/maps?q=University+of+Engineering+and+Technology+(UET)+Lahore,+G.T+Road,+Staff+Houses+Engineering+University+Lahore,+Lahore,+39161,+Pakistan" target="_blank">
-              UET Lahore, G.T Road, Staff Houses, Lahore 39161, Pakistan
-            </a>
-            <br>
-
-            📧 
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=biomedionics@gmail.com">
-              biomedionics@gmail.com
-            </a>
-            <br>
-
-            📞 
-            <a href="tel:+923474281701">+92 347 4281701</a>
-          </div>
+      <!-- Column 1: Brand + Contact -->
+      <div class="footer-brand">
+        <div style="font-size:22px;font-weight:800;color:#fff">
+          Biomedionics
         </div>
 
-        <!-- Column 2: Products -->
-        <div>
-          <div class="footer-col-title">Products</div>
-          <div class="footer-links">
-            <a onclick="openDevice('biosoft')">BioSoft I</a>
-            <a onclick="openDevice('diabsense')">Diabe-Neurosense</a>
-            <a onclick="openDevice('isometri')">Isometri Muscle Meter</a>
-            <a onclick="goPage('services')">Our Services</a>
-          </div>
+        <p>
+          Advanced medical devices engineered for precision diagnostics and real-time clinical monitoring.
+          Trusted by healthcare professionals across Pakistan.
+        </p>
+
+        <div style="margin-top:16px;font-size:13px;color:rgba(255,255,255,.7)">
+          📍 
+          <a href="https://www.google.com/maps?q=University+of+Engineering+and+Technology+(UET)+Lahore,+G.T+Road,+Staff+Houses+Engineering+University+Lahore,+Lahore,+39161,+Pakistan" target="_blank">
+            UET Lahore, G.T Road, Staff Houses, Lahore 39161, Pakistan
+          </a>
+          <br>
+
+          📧 
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=biomedionics@gmail.com">
+            biomedionics@gmail.com
+          </a>
+          <br>
+
+          📞 
+          <a href="tel:+923474281701">
+            +92 347 4281701
+          </a>
         </div>
-
-        <!-- Column 3: Support + Social -->
-        <div>
-          <div class="footer-col-title">Support</div>
-          <div class="footer-links">
-            <a onclick="goPage('track')">Track Order</a>
-
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=biomedionics@gmail.com">
-              Email Support
-            </a>
-
-            <a href="tel:+923474281701">Call Support</a>
-          </div>
-
-          <div class="footer-col-title" style="margin-top:15px;">Follow Us</div>
-          <div class="footer-links social-icons">
-
-            <a href="https://www.instagram.com/" target="_blank">
-              <i class="fab fa-instagram"></i> Instagram
-            </a>
-
-            <a href="https://www.linkedin.com/in/hafizmuhammad-fawad/" target="_blank">
-              <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-
-            <a href="https://x.com/" target="_blank">
-              <i class="fab fa-x-twitter"></i> X (Twitter)
-            </a>
-
-          </div>
-        </div>
-
       </div>
 
-      <!-- Bottom Section -->
-      <div class="footer-bottom">
-        <div>© 2026 Biomedionics. All rights reserved.</div>
-        <div>Designed with precision</div>
+      <!-- Column 2: Products -->
+      <div>
+        <div class="footer-col-title">Products</div>
+        <div class="footer-links">
+          <a onclick="openDevice('biosoft')">BioSoft I</a>
+          <a onclick="openDevice('diabsense')">Diabe-Neurosense</a>
+          <a onclick="openDevice('isometri')">Isometri Muscle Meter</a>
+          <a onclick="goPage('services')">Our Services</a>
+        </div>
+      </div>
+
+      <!-- Column 3: Support + Social -->
+      <div>
+        <div class="footer-col-title">Support</div>
+        <div class="footer-links">
+          <a onclick="goPage('track')">Track Order</a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=biomedionics@gmail.com">
+            Email Support
+          </a>
+          <a href="tel:+923474281701">Call Support</a>
+        </div>
+
+        <div class="footer-col-title" style="margin-top:15px;">Follow Us</div>
+        <div class="footer-links social-icons">
+          <a href="https://www.instagram.com/" target="_blank">
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+
+          <a href="https://www.linkedin.com/in/hafizmuhammad-fawad/" target="_blank">
+            <i class="fab fa-linkedin"></i> LinkedIn
+          </a>
+
+          <a href="https://x.com/" target="_blank">
+            <i class="fab fa-x-twitter"></i> X (Twitter)
+          </a>
+        </div>
       </div>
 
     </div>
-  </div>
-</footer>
-</body>
-</html>
+
     <!-- Bottom -->
     <div class="footer-bottom">
-      <span>© 2025 Biomedionics. All rights reserved.</span>
-      <span>Made in Pakistan 🇵🇰</span>
+      <div>© 2026 Biomedionics. All rights reserved.</div>
+      <div>Designed with precision</div>
     </div>
 
   </div>
 </footer>
 
+</body>
+</html>
 </body>
 </html>
 
