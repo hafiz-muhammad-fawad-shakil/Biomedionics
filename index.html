@@ -1512,20 +1512,19 @@ async function submitReview(){
 }
 
 function addReviewButtonToDetail(devId,devName){
-  const el=document.getElementById('connectArea');
-  const btnId='reviewBtn_'+devId;
-  if(document.getElementById(btnId))return;
+  const parent=document.getElementById('connectArea').parentElement;
+  const existing=document.getElementById('reviewBtnContainer');
+  if(existing)existing.remove();
   const btn=document.createElement('button');
-  btn.id=btnId;
   btn.className='btn-outline';
-  btn.style.cssText='margin-top:16px;width:100%;padding:10px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;font-weight:600;color:var(--text2)';
+  btn.style.cssText='margin-top:16px;width:100%;padding:10px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;font-weight:600;color:var(--text2);cursor:pointer';
   btn.textContent='💬 View / Write Reviews';
   btn.onclick=()=>openReviewPage(devId,devName);
-  const parent=document.getElementById('connectArea').parentElement;
-  if(!document.getElementById(btnId+'_container')){
-    const wrap=document.createElement('div');wrap.id=btnId+'_container';wrap.style.marginTop='16px';
-    wrap.appendChild(btn);parent.appendChild(wrap);
-  }
+  const wrap=document.createElement('div');
+  wrap.id='reviewBtnContainer';
+  wrap.style.marginTop='16px';
+  wrap.appendChild(btn);
+  parent.appendChild(wrap);
 }
 
 // ── CONNECT DEVICE ────────────────────────────────────────────────────
