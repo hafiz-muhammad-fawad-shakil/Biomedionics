@@ -1185,11 +1185,13 @@ function quickAdd(id){
   if(ex)ex.qty++;else cart.push({id,name:d.name,emoji:d.emoji,img:d.img||d.imgUrl||null,pricePKR:d.pricePKR,qty:1});
   updateBadge();showToast('Added to cart!');
 }
-
 // ── DEVICE DETAIL ─────────────────────────────────────────────────────
 function openDevice(id){
   const d=DEVICES[id];if(!d)return;
   currentDevice=d;
+
+  document.querySelectorAll('[id$="_container"]').forEach(el=>el.remove());
+
   document.getElementById('deviceDetail').classList.remove('hidden');
   document.getElementById('devices-section').classList.add('hidden');
   document.getElementById('deviceDetail').scrollIntoView({behavior:'smooth'});
@@ -1218,7 +1220,29 @@ function closeDetail(){
   document.getElementById('deviceDetail').classList.add('hidden');
   document.getElementById('devices-section').classList.remove('hidden');
   currentDevice=null;
+  document.querySelectorAll('[id$="_container"]').forEach(el=>el.remove());
   document.getElementById('devices-section').scrollIntoView({behavior:'smooth'});
+}
+
+function addReviewButtonToDetail(devId, devName){
+  const containerId = 'reviewBtn_' + devId + '_container';
+  const existing = document.getElementById(containerId);
+  if(existing) existing.remove();
+
+  const btn = document.createElement('button');
+  btn.className = 'btn-outline';
+  btn.style.cssText = 'margin-top:16px;width:100%;padding:10px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;font-weight:600;color:var(--text2)';
+  btn.textContent = '💬 View / Write Reviews';
+  btn.onclick = () => openReviewPage(devId, devName);
+
+  const wrap = document.createElement('div');
+  wrap.id = containerId;
+  wrap.style.marginTop = '16px';
+  wrap.appendChild(btn);
+
+  const parent = document.getElementById('connectArea').parentElement;
+  parent.appendChild(wrap);
+}
 }
 
 // ── CURRENCY ──────────────────────────────────────────────────────────
