@@ -1535,7 +1535,22 @@ async function submitReview(){
   loadReviews(currentRvDevId,currentRvStarFilter);
 }
 
-
+function addReviewButtonToDetail(devId,devName){
+  const el=document.getElementById('connectArea');
+  const btnId='reviewBtn_'+devId;
+  if(document.getElementById(btnId))return;
+  const btn=document.createElement('button');
+  btn.id=btnId;
+  btn.className='btn-outline';
+  btn.style.cssText='margin-top:16px;width:100%;padding:10px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;font-weight:600;color:var(--text2)';
+  btn.textContent='💬 View / Write Reviews';
+  btn.onclick=()=>openReviewPage(devId,devName);
+  const parent=document.getElementById('connectArea').parentElement;
+  if(!document.getElementById(btnId+'_container')){
+    const wrap=document.createElement('div');wrap.id=btnId+'_container';wrap.style.marginTop='16px';
+    wrap.appendChild(btn);parent.appendChild(wrap);
+  }
+}
 
 // ── CONNECT DEVICE ────────────────────────────────────────────────────
 function onConnectClick(){
