@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Core Pages -->
+  <url><loc>https://biomedionics.live/</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://biomedionics.live/services.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://biomedionics.live/blogs.html</loc><lastmod>2026-04-11</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://biomedionics.live/about.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Device Pages -->
+  <url><loc>https://biomedionics.live/device-biosoft.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.95</priority>
+    <image:image><image:loc>https://biomedionics.live/android-chrome-512x512.png</image:loc><image:title>BioSoft I 3D Bioprinter Pakistan</image:title></image:image>
+  </url>
+  <url><loc>https://biomedionics.live/device-diabsense.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.95</priority>
+    <image:image><image:loc>https://biomedionics.live/android-chrome-512x512.png</image:loc><image:title>Diabe-Neurosense Diabetic Neuropathy Device Pakistan</image:title></image:image>
+  </url>
+  <url><loc>https://biomedionics.live/device-isometri.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.95</priority>
+    <image:image><image:loc>https://biomedionics.live/android-chrome-512x512.png</image:loc><image:title>Isometri Muscle Meter Pakistan Isometric Dynamometer</image:title></image:image>
+  </url>
+
+  <!-- Support Pages -->
+  <url><loc>https://biomedionics.live/cart.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://biomedionics.live/checkout.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://biomedionics.live/track.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://biomedionics.live/my-orders.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://biomedionics.live/shipping.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://biomedionics.live/returns.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://biomedionics.live/privacy.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+
+  <!-- Blog Articles (Static HTML) -->
+  <url><loc>https://biomedionics.live/blog/diabetic-neuropathy-pakistan.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://biomedionics.live/blog/isometric-testing-guide.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://biomedionics.live/blog/diabe-neurosense-guide.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+
+</urlset>
