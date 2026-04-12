@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en-PK">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Medical Device Repair Services Pakistan | Biomedionics</title>
+<meta name="description" content="Expert repair and maintenance for centrifuges, blood analyzers, patient monitors, ECG machines. 24/7 support, genuine parts, competitive pricing. Biomedionics Pakistan."/>
+<meta name="keywords" content="medical device repair pakistan, centrifuge repair pakistan, biomedical equipment repair, patient monitor repair pakistan"/>
+<link rel="canonical" href="https://biomedionics.live/services.html"/>
+<meta property="og:title" content="Medical Device Repair Services | Biomedionics Pakistan"/>
+<meta property="og:description" content="Expert repair for centrifuges, analyzers, patient monitors, ECG machines. 24/7 support."/>
+<meta property="og:url" content="https://biomedionics.live/services.html"/>
+<meta property="og:image" content="https://biomedionics.live/android-chrome-512x512.png"/>
+<link rel="icon" href="favicon.ico"/>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<link rel="stylesheet" href="css/main.css"/>
+<style>
+.services-hero{background:linear-gradient(135deg,var(--navy) 0%,#1a3a6e 100%);color:#fff;padding:64px 20px 48px;text-align:center}
+.services-hero h1{font-size:clamp(22px,4vw,36px);font-weight:800;margin-bottom:12px}
+.services-hero p{font-size:14px;color:rgba(255,255,255,.65);max-width:560px;margin:0 auto;line-height:1.7}
+.services-grid-wrap{max-width:1200px;margin:0 auto;padding:40px 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:24px}
+.service-card{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:.25s;display:flex;flex-direction:column}
+.service-card:hover{transform:translateY(-4px);box-shadow:0 8px 40px rgba(0,0,0,.14);border-color:var(--blue)}
+.service-card-img{width:100%;height:160px;object-fit:cover;background:#f0f4ff;display:flex;align-items:center;justify-content:center;font-size:48px;flex-shrink:0}
+.service-card-img img{width:100%;height:100%;object-fit:cover}
+.service-card-body{padding:20px;flex:1;display:flex;flex-direction:column}
+.service-card-top{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.service-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#eff6ff,#dbeafe);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.service-name{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:3px}
+.service-price{font-size:13px;color:var(--blue);font-weight:600}
+.service-desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px;flex:1}
+.service-includes{font-size:12px;color:var(--text2);margin-bottom:12px;line-height:1.5}
+.service-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.service-tag{background:var(--off);border:1px solid var(--border);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;color:var(--text2)}
+.service-footer{display:flex;gap:8px;margin-top:auto}
+.service-btn{flex:1;padding:10px;border-radius:8px;font-size:13px;font-weight:700;text-align:center;transition:.2s;display:block}
+.service-btn-primary{background:var(--blue);color:#fff}
+.service-btn-primary:hover{background:var(--blue2);color:#fff}
+.service-btn-secondary{background:var(--off);color:var(--navy);border:1px solid var(--border)}
+.service-btn-secondary:hover{border-color:var(--navy);color:var(--navy)}
+.services-empty{text-align:center;padding:60px 20px;color:var(--text2);grid-column:1/-1}
+</style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5S9GW5JE67"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5S9GW5JE67');
+</script>
+
+</head>
+<body>
+
+<div class="ann">🚀 Free shipping on orders over PKR 200,000 · <a href="track.html">Track your order →</a></div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+  <img src="android-chrome-192x192.png" alt="Biomedionics Icon" style="width: 32px; height: 32px; margin-right: 8px; border-radius: 6px;">
+  <span class="logo-text">Bio<span>medionics</span></span>
+</a>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">Devices</a>
+      <a class="nav-link active" href="services.html">Services</a>
+      <a class="nav-link" href="blogs.html">Blog</a>
+      <a class="nav-link" href="cart.html">Cart</a>
+      <a class="nav-link" href="checkout.html">Checkout</a>
+      <a class="nav-link" href="my-orders.html">My Orders</a>
+    </div>
+    <div class="nav-right">
+      <input type="text" class="nav-search-input" placeholder="Search devices..." oninput="if(this.value.length>1)window.location.href='index.html#s='+encodeURIComponent(this.value)"/>
+      <a class="nav-track-btn" href="track.html">📦 Track</a>
+      <a class="nav-cart-btn" href="cart.html">🛒 Cart <span class="cart-badge" id="cartBadge" style="display:none">0</span></a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a class="nav-link" href="index.html">Devices</a>
+  <a class="nav-link active" href="services.html">Services</a>
+  <a class="nav-link" href="blogs.html">Blog</a>
+  <a class="nav-link" href="cart.html">Cart</a>
+  <a class="nav-link" href="checkout.html">Checkout</a>
+  <a class="nav-link" href="my-orders.html">My Orders</a>
+  <input type="text" class="nav-search-input" placeholder="Search devices..." oninput="if(this.value.length>1)window.location.href='index.html#s='+encodeURIComponent(this.value)" style="margin-top:8px;width:100%"/>
+  <a href="track.html" style="display:block;margin-top:8px;padding:12px 16px;background:#f8fafc;border-radius:8px;font-size:14px;font-weight:600;color:var(--text2);text-decoration:none;">📦 Track Order</a>
+</div><div class="services-hero">
+  <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px">Professional Support</div>
+  <h1>Our Repair & Maintenance Services</h1>
+  <p>Expert technical services for medical devices — centrifuges, analyzers, diagnostic equipment, and more. Trusted by clinics and hospitals across Pakistan.</p>
+  <div style="display:flex;justify-content:center;gap:32px;margin-top:36px;flex-wrap:wrap">
+    <div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#38bdf8">24/7</div><div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:2px">Emergency Support</div></div>
+    <div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#38bdf8">100%</div><div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:2px">Genuine Parts</div></div>
+    <div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#38bdf8">PKR</div><div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:2px">Competitive Pricing</div></div>
+  </div>
+</div>
+
+<div class="services-grid-wrap" id="servicesGrid">
+  <div class="services-empty"><div style="font-size:48px;margin-bottom:16px">⚙️</div><div style="font-size:16px;font-weight:600;color:var(--navy)">Loading Services...</div></div>
+</div>
+
+<div style="background:var(--off);border-top:1px solid var(--border);padding:48px 20px;text-align:center">
+  <div style="max-width:560px;margin:0 auto">
+    <h3 style="font-size:22px;font-weight:800;color:var(--navy);margin-bottom:10px">Need a Custom Service?</h3>
+    <p style="font-size:15px;color:var(--text2);margin-bottom:24px">Don't see your device listed? Contact us and we'll assess your repair needs.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="tel:+923474281701" style="background:var(--blue);color:#fff;padding:13px 28px;border-radius:var(--radius);font-size:15px;font-weight:700;display:inline-flex;align-items:center;gap:8px">📞 +92 347 4281701</a>
+      <a href="mailto:biomedionics@gmail.com" style="background:#fff;border:2px solid var(--border);color:var(--navy);padding:13px 28px;border-radius:var(--radius);font-size:15px;font-weight:700;display:inline-flex;align-items:center;gap:8px">📧 Email Us</a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">Biomedionics</div>
+        <p>Advanced medical devices engineered for precision diagnostics and real-time clinical monitoring. Trusted by healthcare professionals across Pakistan.</p>
+        <div class="footer-contact">
+          <a href="https://maps.google.com/?q=Narowal+Muridke+Road+Punjab+Pakistan" target="_blank" rel="noopener">📍 Narowal - Muridke Road, Punjab, Pakistan</a>
+          <a href="mailto:biomedionics@gmail.com">📧 biomedionics@gmail.com</a>
+          <a href="tel:+923474281701">📞 +92 347 4281701</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Products</div>
+        <div class="footer-links">
+          <a href="device-biosoft.html">BioSoft I</a>
+          <a href="device-diabsense.html">Diabe-Neurosense</a>
+          <a href="device-isometri.html">Isometri Muscle Meter</a>
+          <a href="services.html">Repair Services</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Support</div>
+        <div class="footer-links">
+          <a href="track.html">Track Order</a>
+          <a href="my-orders.html">My Orders</a>
+          <a href="mailto:biomedionics@gmail.com">Email Support</a>
+          <a href="tel:+923474281701">Call Us</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <a href="shipping.html">Shipping Policy</a>
+          <a href="returns.html">Return Policy</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="blogs.html">Blog</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Biomedionics. All rights reserved.</span>
+      <span>Made with ❤️ in Pakistan 🇵🇰</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/shared.js"></script>
+<script>
+var allServices = {};
+var servicesLoaded = false;
+
+// Show loading state immediately
+document.addEventListener('DOMContentLoaded', function() {
+  var g = document.getElementById('servicesGrid');
+  if(g) g.innerHTML = '<div class="services-loading" style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#6b7280"><div style="font-size:40px;margin-bottom:12px">⚙️</div><div style="font-size:16px;font-weight:600">Loading services...</div></div>';
+});
+
+db.ref('/services').on('value', function(snap) {
+  allServices = {};
+  if (snap.exists()) snap.forEach(function(c) {
+    if(c.val()) allServices[c.key] = c.val();
+  });
+  servicesLoaded = true;
+  renderServices();
+}, function(err) {
+  console.error('Services load error:', err);
+  servicesLoaded = true;
+  renderServices();
+});
+
+function renderServices() {
+  var grid = document.getElementById('servicesGrid');
+  if (!grid) return;
+  var services = Object.values(allServices);
+
+  if (!services.length) {
+    grid.innerHTML = '<div class="services-empty"><div style="font-size:48px;margin-bottom:16px">🔧</div><h3 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:8px">Services Coming Soon</h3><p style="color:var(--text2);margin-bottom:20px">Our repair services will be listed here soon.</p><a href="tel:+923474281701" style="background:var(--blue);color:#fff;padding:12px 24px;border-radius:var(--radius);font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:8px">📞 Call Us Now</a></div>';
+    return;
+  }
+
+  grid.innerHTML = services.sort(function(a,b){return (a.order||99)-(b.order||99);}).map(function(s) {
+    var icon = s.emoji || s.icon || '🔧';
+    var name = s.name || 'Service';
+    var desc = s.description || s.desc || '';
+    var price = s.price ? 'PKR ' + Number(s.price).toLocaleString() : 'Contact for pricing';
+    var turnaround = s.turnaround || '';
+    var includes = s.includes || '';
+    var tag = s.tag || '';
+    var tagsArr = s.tags ? s.tags.slice() : (tag ? [tag] : []);
+    if (turnaround) tagsArr.push('⏱ ' + turnaround);
+
+    var imgHtml = s.imageUrl
+      ? '<div class="service-card-img"><img src="' + s.imageUrl + '" onerror="this.parentElement.innerHTML=\'<span style=\\\"font-size:48px\\\">' + icon + '</span>\'"/></div>'
+      : '<div class="service-card-img" style="background:linear-gradient(135deg,#eff6ff,#dbeafe)"><span style="font-size:48px">' + icon + '</span></div>';
+
+    return '<div class="service-card">' +
+      imgHtml +
+      '<div class="service-card-body">' +
+        '<div class="service-card-top">' +
+          '<div class="service-icon">' + icon + '</div>' +
+          '<div><div class="service-name">' + name + '</div><div class="service-price">' + price + '</div></div>' +
+        '</div>' +
+        '<div class="service-desc">' + desc + '</div>' +
+        (includes ? '<div class="service-includes"><strong style="color:var(--navy)">Includes:</strong> ' + includes + '</div>' : '') +
+        (tagsArr.length ? '<div class="service-tags">' + tagsArr.map(function(t){return '<span class="service-tag">' + t + '</span>';}).join('') + '</div>' : '') +
+        '<div class="service-footer">' +
+          '<a href="tel:+923474281701" class="service-btn service-btn-primary">📞 Call for Service</a>' +
+          '<a href="mailto:biomedionics@gmail.com?subject=Service Inquiry: ' + encodeURIComponent(name) + '" class="service-btn service-btn-secondary">📧 Email</a>' +
+        '</div>' +
+      '</div></div>';
+  }).join('');
+}
+
+updateCartBadge();
+applyFirebaseSEO('services');
+</script>
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en-PK">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Biomedical Journal & Articles | Biomedionics Research Pakistan</title>
+<meta name="description" content="Peer-reviewed articles, clinical guides and technical reviews on biomedical devices — ventilators, patient monitors, diagnostics and more. Published by Biomedionics Pakistan."/>
+<meta name="keywords" content="biomedical journal pakistan, medical device articles, clinical research pakistan, biomedionics blog"/>
+<link rel="canonical" href="https://biomedionics.live/blogs.html"/>
+<meta property="og:title" content="Biomedical Journal & Articles | Biomedionics"/>
+<meta property="og:description" content="Peer-reviewed clinical guides and technical reviews on biomedical devices."/>
+<meta property="og:url" content="https://biomedionics.live/blogs.html"/>
+<meta property="og:image" content="https://biomedionics.live/android-chrome-512x512.png"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="preconnect" href="https://www.gstatic.com"/>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<link rel="stylesheet" href="css/main.css"/>
+<style>
+.blogs-hero{background:linear-gradient(135deg,#0a1628 0%,#1a3a6e 100%);color:#fff;padding:64px 20px 48px;text-align:center}
+.blogs-hero h1{font-size:clamp(24px,4vw,40px);font-weight:800;margin-bottom:12px;font-family:Georgia,serif}
+.blogs-hero p{font-size:15px;color:rgba(255,255,255,.7);max-width:560px;margin:0 auto;line-height:1.7}
+.blogs-inner{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.blog-cats-nav{display:flex;gap:8px;flex-wrap:wrap;padding:16px 0;border-bottom:2px solid var(--border);margin-bottom:24px;align-items:center}
+.blog-cat-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border2);background:#fff;color:var(--text2);transition:.2s}
+.blog-cat-btn.active,.blog-cat-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.blog-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:40px;background:#fff}
+.blog-card{background:#fff;border-bottom:1px solid var(--border);padding:18px 22px;cursor:pointer;transition:background .15s;display:flex;gap:16px;align-items:flex-start}
+.blog-card:last-child{border-bottom:none}
+.blog-card:hover{background:#f8fafc}
+.blog-card-num{font-size:13px;font-weight:700;color:var(--text3);min-width:24px;margin-top:2px;font-family:Georgia,serif}
+.blog-card-main{flex:1;min-width:0}
+.blog-card-journal{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--blue);margin-bottom:4px}
+.blog-card-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px;font-family:Georgia,serif;line-height:1.4}
+.blog-card-authors{font-size:12px;color:var(--text2);margin-bottom:4px}
+.blog-card-abstract{font-size:12px;color:var(--text2);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:6px}
+.blog-card-meta{display:flex;gap:12px;font-size:11px;color:var(--text3);flex-wrap:wrap}
+.blog-card-thumb{width:80px;height:80px;object-fit:cover;border-radius:6px;flex-shrink:0;border:1px solid var(--border)}
+.art-journal-wrap{background:#fff;border:1px solid var(--border);border-radius:8px;padding:28px;margin-bottom:32px}
+.art-jheader{border-bottom:2px solid var(--border);padding-bottom:20px;margin-bottom:20px}
+.art-jtag{display:inline-block;background:#eff6ff;color:var(--blue);font-size:11px;font-weight:700;padding:3px 10px;letter-spacing:.5px;text-transform:uppercase;border-radius:3px}
+.art-jtitle{font-size:clamp(18px,3vw,26px);font-weight:700;color:var(--navy);margin:12px 0 8px;font-family:Georgia,serif;line-height:1.35}
+.art-jauthors{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.art-jaffil{font-size:12px;color:var(--text2);font-style:italic;margin-bottom:8px}
+.art-jmeta{display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--text2);margin-top:8px}
+.art-jmeta div{display:flex;flex-direction:column;gap:2px}
+.art-jmeta strong{color:var(--navy);font-size:10px;text-transform:uppercase;letter-spacing:.5px}
+.art-doi{font-size:12px;color:var(--text2);margin-top:8px}
+.art-doi a{color:var(--blue);text-decoration:none}
+.art-keywords{font-size:12px;color:var(--text2);margin-top:6px}
+.art-action-bar{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap;align-items:center}
+.art-action-btn{padding:7px 14px;border:1px solid var(--border2);background:#fff;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s}
+.art-action-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.art-btn-pdf{background:#fee2e2;border-color:#fca5a5;color:#991b1b}
+.art-btn-pdf:hover{background:#dc2626;color:#fff;border-color:#dc2626}
+.art-stats-bar{display:flex;gap:10px;font-size:12px;color:var(--text2);margin-left:auto}
+.art-abstract-box{background:var(--off);border-left:4px solid var(--navy);padding:14px 18px;margin:16px 0;border-radius:0 6px 6px 0}
+.art-abstract-box strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--text2);margin-bottom:6px}
+.art-body{font-family:Georgia,serif;font-size:15px;line-height:1.85;color:var(--text)}
+.art-body h3{font-size:13px;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(--border);padding-bottom:6px;margin:24px 0 10px;font-family:'Segoe UI',sans-serif;color:var(--navy)}
+.art-body p{margin-bottom:14px}
+.art-body ul,.art-body ol{padding-left:20px;margin-bottom:14px}
+.art-body li{margin-bottom:6px}
+.art-body img{max-width:100%;border-radius:6px;margin:10px 0}
+.art-body table{width:100%;border-collapse:collapse;font-size:13px}
+.art-body table th{background:#f8fafc;padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border)}
+.art-body table td{padding:8px 12px;border-bottom:1px solid var(--border)}
+.art-references{margin-top:24px;padding-top:16px;border-top:2px solid var(--border)}
+.art-references strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;color:var(--text2)}
+.art-ref-item{font-size:12px;color:var(--text2);padding:4px 0 4px 20px;text-indent:-20px;line-height:1.5}
+.empty-blog{text-align:center;padding:60px 20px;color:var(--text2)}
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--text2);font-size:13px;cursor:pointer;margin-bottom:20px;font-family:Georgia,serif}
+.back-btn:hover{color:var(--navy)}
+</style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5S9GW5JE67"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5S9GW5JE67');
+</script>
+
+</head>
+<body>
+
+<!-- NAV -->
+<div class="ann">🚀 Free shipping on orders over PKR 200,000 · <a href="track.html">Track your order →</a></div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+  <img src="android-chrome-192x192.png" alt="Biomedionics Icon" style="width: 32px; height: 32px; margin-right: 8px; border-radius: 6px;">
+  <span class="logo-text">Bio<span>medionics</span></span>
+</a>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">Devices</a>
+      <a class="nav-link" href="services.html">Services</a>
+      <a class="nav-link active" href="blogs.html">Blog</a>
+      <a class="nav-link" href="cart.html">Cart</a>
+      <a class="nav-link" href="checkout.html">Checkout</a>
+      <a class="nav-link" href="my-orders.html">My Orders</a>
+    </div>
+    <div class="nav-right">
+      <input type="text" class="nav-search-input" placeholder="Search devices..." oninput="if(this.value.length>1)window.location.href='index.html#s='+encodeURIComponent(this.value)"/>
+      <a class="nav-track-btn" href="track.html">📦 Track</a>
+      <a class="nav-cart-btn" href="cart.html">🛒 Cart <span class="cart-badge" id="cartBadge" style="display:none">0</span></a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a class="nav-link" href="index.html">Devices</a>
+  <a class="nav-link" href="services.html">Services</a>
+  <a class="nav-link active" href="blogs.html">Blog</a>
+  <a class="nav-link" href="cart.html">Cart</a>
+  <a class="nav-link" href="checkout.html">Checkout</a>
+  <a class="nav-link" href="my-orders.html">My Orders</a>
+  <input type="text" class="nav-search-input" placeholder="Search devices..." oninput="if(this.value.length>1)window.location.href='index.html#s='+encodeURIComponent(this.value)" style="margin-top:8px;width:100%"/>
+  <a href="track.html" style="display:block;margin-top:8px;padding:12px 16px;background:#f8fafc;border-radius:8px;font-size:14px;font-weight:600;color:var(--text2);text-decoration:none;">📦 Track Order</a>
+</div><!-- HERO -->
+<div class="blogs-hero">
+  <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px">Biomedionics — Research & Knowledge</div>
+  <h1>Biomedical Journal & Articles</h1>
+  <p>Peer-reviewed articles, clinical guides and technical reviews on biomedical devices — ventilators, patient monitors, diagnostics and more.</p>
+</div>
+
+<!-- CONTENT -->
+<div class="blogs-inner">
+  <!-- Category Nav -->
+  <div class="blog-cats-nav" id="blogCatsNav">
+    <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-right:4px">Browse:</span>
+    <button class="blog-cat-btn active" onclick="filterCat('all')">All Articles</button>
+  </div>
+  
+
+  <a href="diabe-neurosense-guide.html" style="text-decoration: none; color: black;">
+    <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 15px; border-radius: 8px;">
+        <h2>Diabe Neurosense Guide</h2>
+        <p>A complete guide to understanding and using the Diabe Neurosense device effectively...</p>
+        <span style="color: blue; font-weight: bold;">Read More ➔</span>
+    </div>
+</a>
+
+<a href="diabetic-neuropathy-pakistan.html" style="text-decoration: none; color: black;">
+    <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 15px; border-radius: 8px;">
+        <h2>Diabetic Neuropathy in Pakistan</h2>
+        <p>Exploring the impact, diagnosis, and management of diabetic neuropathy across Pakistan...</p>
+        <span style="color: blue; font-weight: bold;">Read More ➔</span>
+    </div>
+</a>
+
+  <!-- Search -->
+  <div style="margin-bottom:18px">
+    <div style="position:relative;max-width:420px">
+      <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:14px">🔍</span>
+      <input type="text" id="blogSearchInput" placeholder="Search articles, keywords, authors..." oninput="filterSearch(this.value)"
+        style="width:100%;padding:10px 14px 10px 36px;border:1px solid var(--border2);border-radius:4px;font-size:13px;outline:none;font-family:inherit"/>
+    </div>
+  </div>
+
+  <!-- Grid View -->
+  <div id="blogGridView">
+    <div style="font-size:12px;color:var(--text2);margin-bottom:10px" id="blogResultCount"></div>
+    <div class="blog-list" id="blogCardsGrid">
+      <div class="empty-blog"><div style="font-size:32px;margin-bottom:12px">⏳</div><div style="font-size:15px;font-weight:600;color:var(--navy)">Loading articles...</div></div>
+    </div>
+  </div>
+
+  <!-- Article View -->
+  <div id="blogArticleView" style="display:none">
+    <div class="back-btn" onclick="closeArticle()">← Back to Journal</div>
+    <div class="art-journal-wrap" id="blogArticleDetail"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">Biomedionics</div>
+        <p>Advanced medical devices engineered for precision diagnostics and real-time clinical monitoring. Trusted by healthcare professionals across Pakistan.</p>
+        <div class="footer-contact">
+          <a href="https://maps.google.com/?q=Narowal+Muridke+Road+Punjab+Pakistan" target="_blank" rel="noopener">📍 Narowal - Muridke Road, Punjab, Pakistan</a>
+          <a href="mailto:biomedionics@gmail.com">📧 biomedionics@gmail.com</a>
+          <a href="tel:+923474281701">📞 +92 347 4281701</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Products</div>
+        <div class="footer-links">
+          <a href="device-biosoft.html">BioSoft I</a>
+          <a href="device-diabsense.html">Diabe-Neurosense</a>
+          <a href="device-isometri.html">Isometri Muscle Meter</a>
+          <a href="services.html">Repair Services</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Support</div>
+        <div class="footer-links">
+          <a href="track.html">Track Order</a>
+          <a href="my-orders.html">My Orders</a>
+          <a href="mailto:biomedionics@gmail.com">Email Support</a>
+          <a href="tel:+923474281701">Call Us</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <a href="shipping.html">Shipping Policy</a>
+          <a href="returns.html">Return Policy</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="blogs.html">Blog</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Biomedionics. All rights reserved.</span>
+      <span>Made with ❤️ in Pakistan 🇵🇰</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/shared.js"></script>
+<script>
+// ═══ BLOGS PAGE — Firebase Loading (FIXED) ═══
+var blogCats = {}, blogArts = {}, activeCat = 'all', searchQ = '';
+var catsLoaded = false, artsLoaded = false;
+
+// Load categories
+db.ref('/blog_categories').on('value', function(snap) {
+  blogCats = snap.exists() ? snap.val() : {};
+  catsLoaded = true;
+  renderCatsNav();
+  if (artsLoaded) renderCards();
+});
+
+// Load articles — NO draft filter, load everything
+db.ref('/blog_articles').on('value', function(snap) {
+  blogArts = {};
+  if (snap.exists()) {
+    snap.forEach(function(c) {
+      var v = c.val();
+      if (v && v.title) blogArts[c.key] = Object.assign({ _key: c.key }, v);
+    });
+  }
+  artsLoaded = true;
+  renderCards();
+  renderCatsNav();
+});
+
+function renderCatsNav() {
+  var el = document.getElementById('blogCatsNav');
+  if (!el) return;
+  var cats = Object.values(blogCats);
+  var h = '<span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-right:4px">Browse:</span>';
+  h += '<button class="blog-cat-btn ' + (activeCat === 'all' ? 'active' : '') + '" onclick="filterCat(\'all\')">All Articles</button>';
+  cats.forEach(function(c) {
+    h += '<button class="blog-cat-btn ' + (activeCat === c.id ? 'active' : '') + '" onclick="filterCat(\'' + c.id + '\')">' + (c.icon || '') + ' ' + (c.name || '') + '</button>';
+  });
+  el.innerHTML = h;
+}
+
+function filterCat(id) {
+  activeCat = id; searchQ = '';
+  var si = document.getElementById('blogSearchInput'); if (si) si.value = '';
+  renderCatsNav(); renderCards();
+}
+
+function filterSearch(q) {
+  searchQ = (q || '').toLowerCase().trim(); renderCards();
+}
+
+function renderCards() {
+  var el = document.getElementById('blogCardsGrid');
+  var cEl = document.getElementById('blogResultCount');
+  if (!el) return;
+
+  var arts = Object.values(blogArts);
+
+  if (!artsLoaded) {
+    el.innerHTML = '<div class="empty-blog"><div style="font-size:32px;margin-bottom:12px">⏳</div><div style="font-size:15px;font-weight:600;color:var(--navy)">Loading articles from database...</div></div>';
+    return;
+  }
+
+  if (arts.length === 0) {
+    el.innerHTML = '<div class="empty-blog"><div style="font-size:40px;margin-bottom:14px">📭</div><div style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:6px;font-family:Georgia,serif">No articles published yet</div><p>Check back soon for clinical guides and research articles.</p></div>';
+    if (cEl) cEl.textContent = '';
+    return;
+  }
+
+  if (activeCat !== 'all') arts = arts.filter(function(a) { return a.category === activeCat; });
+  if (searchQ) arts = arts.filter(function(a) {
+    return ((a.title || '') + (a.abstract || a.summary || '') + (a.keywords || '') + (a.authors || a.author || '')).toLowerCase().indexOf(searchQ) !== -1;
+  });
+  arts.sort(function(a, b) { return (b.createdAt || 0) - (a.createdAt || 0); });
+
+  if (cEl) cEl.textContent = 'Showing ' + arts.length + ' article' + (arts.length !== 1 ? 's' : '');
+
+  if (!arts.length) {
+    el.innerHTML = '<div class="empty-blog"><div style="font-size:40px;margin-bottom:14px">📭</div><div style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:6px">No articles found</div><p>Try a different category or search term.</p></div>';
+    return;
+  }
+
+  el.innerHTML = arts.map(function(a, i) {
+    var cat = blogCats[a.category] || {};
+    var date = a.publishDate || (a.createdAt ? new Date(a.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '');
+    var authors = a.authors || a.author || 'Biomedionics';
+    var abstract = a.abstract || a.summary || '';
+    var hasPDF = !!(a.pdfBase64 || a.pdfUrl);
+    var kwds = a.keywords ? a.keywords.split(',').slice(0, 4).join(', ') : '';
+    var vol = a.volume ? 'Vol.' + a.volume + (a.issue ? ', No.' + a.issue : '') + (a.year ? ' (' + a.year + ')' : '') : '';
+    var thumb = a.coverImg ? '<img class="blog-card-thumb" src="' + a.coverImg + '" onerror="this.style.display=\'none\'"/>' : '';
+
+    return '<div class="blog-card" onclick="openArticle(\'' + a._key + '\')">' +
+      '<div class="blog-card-num">' + (i + 1) + '.</div>' +
+      '<div class="blog-card-main">' +
+        '<div class="blog-card-journal">' + (cat.name || 'Biomedionics Journal') + (vol ? ' &nbsp;·&nbsp; ' + vol : '') + (a.articleType ? ' &nbsp;·&nbsp; ' + a.articleType : '') + (hasPDF ? ' &nbsp;<span style="background:#fee2e2;color:#991b1b;padding:1px 6px;border-radius:2px;font-size:9px">PDF</span>' : '') + (a.openAccess === 'yes' ? ' <span style="background:#d1fae5;color:#065f46;padding:1px 6px;border-radius:2px;font-size:9px">OPEN ACCESS</span>' : '') + '</div>' +
+        '<div class="blog-card-title">' + (a.title || 'Untitled') + '</div>' +
+        '<div class="blog-card-authors">' + authors + '</div>' +
+        (a.affiliation ? '<div style="font-size:11px;color:var(--text3);margin-bottom:4px;font-style:italic">' + a.affiliation + '</div>' : '') +
+        '<div class="blog-card-abstract">' + abstract + '</div>' +
+        '<div class="blog-card-meta">' +
+          (kwds ? '<span><strong>Keywords:</strong> <em>' + kwds + '</em></span>' : '') +
+          '<span>👁 ' + (a.views || 0) + '</span>' +
+          '<span>⬇ ' + (a.downloads || 0) + '</span>' +
+          '<span>📅 ' + date + '</span>' +
+        '</div>' +
+      '</div>' +
+      thumb +
+    '</div>';
+  }).join('');
+}
+
+function openArticle(key) {
+  var a = blogArts[key]; if (!a) return;
+  var cat = blogCats[a.category] || {};
+  var authors = a.authors || a.author || 'Biomedionics';
+  var date = a.publishDate || (a.createdAt ? new Date(a.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '');
+  var vol = a.volume ? 'Vol. ' + a.volume + (a.issue ? ', No.' + a.issue : '') + (a.year ? ' (' + a.year + ')' : '') : '';
+  var hasPDF = !!(a.pdfBase64 || a.pdfUrl);
+  var h = '';
+
+  h += '<div class="art-jheader">';
+  h += '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px"><span class="art-jtag">' + (cat.name || 'Biomedionics Journal') + (vol ? ' — ' + vol : '') + '</span>';
+  if (a.articleType) h += '<span style="background:var(--off);border:1px solid var(--border);padding:2px 8px;font-size:10px;font-weight:700;color:var(--text2)">' + a.articleType + '</span>';
+  if (a.openAccess === 'yes') h += '<span style="background:#d1fae5;color:#065f46;padding:2px 8px;font-size:10px;font-weight:700">OPEN ACCESS</span>';
+  if (hasPDF) h += '<span style="background:#fee2e2;color:#991b1b;padding:2px 8px;font-size:10px;font-weight:700">FREE PDF</span>';
+  h += '</div>';
+  h += '<h1 class="art-jtitle">' + (a.title || '') + '</h1>';
+  h += '<div class="art-jauthors">' + authors + '</div>';
+  if (a.affiliation) h += '<div class="art-jaffil">' + a.affiliation + '</div>';
+  h += '<div class="art-jmeta">';
+  if (date) h += '<div><strong>Published</strong>' + date + '</div>';
+  if (a.readTime) h += '<div><strong>Read Time</strong>' + a.readTime + '</div>';
+  h += '<div><strong>Views</strong>' + (a.views || 0) + '</div>';
+  h += '</div>';
+  if (a.doi) h += '<div class="art-doi">DOI: <a href="https://doi.org/' + a.doi + '" target="_blank">' + a.doi + '</a></div>';
+  if (a.keywords) h += '<div class="art-keywords"><strong>Keywords:</strong> <em>' + a.keywords + '</em></div>';
+  h += '</div>';
+
+  h += '<div class="art-action-bar">';
+  if (hasPDF) h += '<button class="art-action-btn art-btn-pdf" onclick="downloadPDF(\'' + key + '\')">📄 PDF</button>';
+  h += '<button class="art-action-btn art-btn-print" onclick="printArticle()">🖨️ Print</button>';
+  h += '<button class="art-action-btn art-btn-share" onclick="shareArticle(\'' + a.title + '\')">🔗 Share</button>';
+  h += '<div class="art-stats-bar"><span>👁 ' + (a.views || 0) + '</span><span>⬇ ' + (a.downloads || 0) + '</span></div>';
+  h += '</div>';
+
+  if (a.coverImg) h += '<img src="' + a.coverImg + '" style="width:100%;max-height:280px;object-fit:cover;border-radius:4px;margin-bottom:18px;border:1px solid var(--border)" onerror="this.style.display=\'none\'"/>';
+  if (a.abstract || a.summary) h += '<div class="art-abstract-box"><strong>Abstract</strong><div>' + (a.abstract || a.summary) + '</div></div>';
+
+  h += '<div class="art-body">';
+  (a.contentBlocks || []).forEach(function(b) {
+    if (b.type === 'heading') h += '<h3>' + (b.value || '') + '</h3>';
+    else if (b.type === 'text') h += '<p>' + (b.value || '').replace(/\n/g, '<br>') + '</p>';
+    else if (b.type === 'image' && b.value) h += '<figure style="margin:14px 0;text-align:center"><img src="' + b.value + '" style="max-width:100%;border-radius:6px" onerror="this.style.display=\'none\'"/>' + (b.caption ? '<figcaption style="font-size:12px;color:var(--text2);margin-top:5px;font-style:italic">' + b.caption + '</figcaption>' : '') + '</figure>';
+    else if (b.type === 'list') { var items = (b.value || '').split('\n').filter(Boolean); h += '<ul>' + items.map(function(x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; }
+    else if (b.type === 'table' && b.value) h += '<div style="overflow-x:auto;margin:14px 0"><table>' + b.value + '</table></div>';
+  });
+  h += '</div>';
+
+  if (a.references && a.references.trim()) {
+    h += '<div class="art-references"><strong>References</strong>';
+    a.references.split('\n').filter(function(r) { return r.trim(); }).forEach(function(r, i) { h += '<div class="art-ref-item">' + (i + 1) + '. ' + r.trim() + '</div>'; });
+    h += '</div>';
+  }
+
+  document.getElementById('blogArticleDetail').innerHTML = h;
+  document.getElementById('blogGridView').style.display = 'none';
+  document.getElementById('blogArticleView').style.display = 'block';
+  window.scrollTo(0, 0);
+  history.pushState({ article: key }, '', '?article=' + key);
+  document.title = (a.title || 'Article') + ' | Biomedionics Journal';
+  db.ref('/blog_articles/' + key + '/views').transaction(function(v) { return (v || 0) + 1; });
+}
+
+function closeArticle() {
+  document.getElementById('blogGridView').style.display = 'block';
+  document.getElementById('blogArticleView').style.display = 'none';
+  window.scrollTo(0, 0);
+  history.pushState({}, '', 'blogs.html');
+  document.title = 'Biomedical Journal & Articles | Biomedionics Research Pakistan';
+}
+
+function downloadPDF(key) {
+  var a = blogArts[key]; if (!a) return;
+  if (a.pdfUrl) { window.open(a.pdfUrl, '_blank'); }
+  else if (a.pdfBase64) { var l = document.createElement('a'); l.href = a.pdfBase64; l.download = (a.pdfName || 'article.pdf'); document.body.appendChild(l); l.click(); document.body.removeChild(l); }
+  showToast('Downloading PDF...');
+  db.ref('/blog_articles/' + key + '/downloads').transaction(function(v) { return (v || 0) + 1; });
+}
+
+function printArticle() {
+  window.print();
+}
+
+function shareArticle(title) {
+  if (navigator.share) { navigator.share({ title: title, url: window.location.href }); }
+  else { navigator.clipboard.writeText(window.location.href).then(function() { showToast('Link copied!'); }); }
+}
+
+// Handle browser back in article view
+window.addEventListener('popstate', function(e) {
+  if (!e.state || !e.state.article) {
+    document.getElementById('blogGridView').style.display = 'block';
+    document.getElementById('blogArticleView').style.display = 'none';
+  }
+});
+
+// Cart badge
+updateCartBadge();
+
+// Apply Firebase SEO overrides
+applyFirebaseSEO('blogs');
+</script>
+</body>
+</html>

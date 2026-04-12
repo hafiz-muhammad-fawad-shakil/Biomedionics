@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-PK">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="preconnect" href="https://www.gstatic.com"/>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<link rel="stylesheet" href="css/main.css"/>
+<title>Shipping Policy | Biomedionics Pakistan</title>
+<meta name="description" content="Biomedionics shipping policy. Free shipping over PKR 200,000. Punjab: 1-2 days. Other provinces: 2-4 days. International shipping available."/>
+<link rel="canonical" href="https://biomedionics.live/shipping.html"/>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5S9GW5JE67"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5S9GW5JE67');
+</script>
+
+</head>
+<body>
+<div class="ann">🚀 Free shipping on orders over PKR 200,000 · <a href="track.html">Track your order →</a></div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+  <img src="android-chrome-192x192.png" alt="Biomedionics Icon" style="width: 32px; height: 32px; margin-right: 8px; border-radius: 6px;">
+  <span class="logo-text">Bio<span>medionics</span></span>
+</a>
+    <div class="nav-links">
+      <a class="nav-link active" href="index.html">Devices</a>
+      <a class="nav-link" href="services.html">Services</a>
+      <a class="nav-link" href="blogs.html">Blog</a>
+      <a class="nav-link" href="cart.html">Cart</a>
+      <a class="nav-link" href="checkout.html">Checkout</a>
+      <a class="nav-link" href="my-orders.html">My Orders</a>
+    </div>
+    <div class="nav-right">
+      <input type="text" class="nav-search-input" placeholder="Search devices..." oninput="if(this.value.length>1)window.location.href='index.html#s='+encodeURIComponent(this.value)"/>
+      <a class="nav-track-btn" href="track.html">📦 Track</a>
+      <a class="nav-cart-btn" href="cart.html">🛒 Cart <span class="cart-badge" id="cartBadge" style="display:none">0</span></a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a class="nav-link active" href="index.html">Devices</a>
+  <a class="nav-link" href="services.html">Services</a>
+  <a class="nav-link" href="blogs.html">Blog</a>
+  <a class="nav-link" href="cart.html">Cart</a>
+  <a class="nav-link" href="checkout.html">Checkout</a>
+  <a class="nav-link" href="my-orders.html">My Orders</a>
+  <input type="text" class="nav-search-input" placeholder="Search devices..." oninput="if(this.value.length>1)window.location.href='index.html#s='+encodeURIComponent(this.value)" style="margin-top:8px;width:100%"/>
+  <a href="track.html" style="display:block;margin-top:8px;padding:12px 16px;background:#f8fafc;border-radius:8px;font-size:14px;font-weight:600;color:var(--text2);text-decoration:none;">📦 Track Order</a>
+</div><div style="max-width:760px;margin:0 auto;padding:48px 20px">
+  <h1 style="font-size:28px;font-weight:800;color:var(--navy);margin-bottom:24px">📦 Shipping Policy</h1>
+  <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:20px">
+    <div><h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px">📍 Delivery Areas</h3><p style="font-size:14px;color:var(--text2);line-height:1.7">We ship nationwide across Pakistan (Punjab, Sindh, KPK, Balochistan, AJK) and internationally to UAE, KSA, UK, USA, and other countries.</p></div>
+    <div><h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px">⏱ Delivery Times</h3><ul style="font-size:14px;color:var(--text2);line-height:1.9;list-style:none;padding:0"><li>🟢 <strong>Punjab:</strong> 1–2 business days</li><li>🟡 <strong>Other Provinces:</strong> 2–4 business days</li><li>🌍 <strong>International:</strong> 5–14 business days</li></ul></div>
+    <div><h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px">🎁 Free Shipping</h3><p style="font-size:14px;color:var(--text2);line-height:1.7"><strong style="color:#059669">Free shipping</strong> on all orders over PKR 200,000 within Pakistan!</p></div>
+    <div><h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px">📋 Order Processing</h3><p style="font-size:14px;color:var(--text2);line-height:1.7">Orders are processed within 1–2 business days after payment confirmation. You will receive your Order ID immediately after placing your order.</p></div>
+    <div><h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px">🌍 International Orders</h3><p style="font-size:14px;color:var(--text2);line-height:1.7">International orders may be subject to customs duties and import taxes, which are the responsibility of the buyer. Contact us at <a href="mailto:biomedionics@gmail.com" style="color:var(--blue)">biomedionics@gmail.com</a> for international shipping quotes.</p></div>
+  </div>
+</div>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">Biomedionics</div>
+        <p>Advanced medical devices engineered for precision diagnostics and real-time clinical monitoring. Trusted by healthcare professionals across Pakistan.</p>
+        <div class="footer-contact">
+          <a href="https://maps.google.com/?q=Narowal+Muridke+Road+Punjab+Pakistan" target="_blank" rel="noopener">📍 Narowal - Muridke Road, Punjab, Pakistan</a>
+          <a href="mailto:biomedionics@gmail.com">📧 biomedionics@gmail.com</a>
+          <a href="tel:+923474281701">📞 +92 347 4281701</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Products</div>
+        <div class="footer-links">
+          <a href="device-biosoft.html">BioSoft I</a>
+          <a href="device-diabsense.html">Diabe-Neurosense</a>
+          <a href="device-isometri.html">Isometri Muscle Meter</a>
+          <a href="services.html">Repair Services</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Support</div>
+        <div class="footer-links">
+          <a href="track.html">Track Order</a>
+          <a href="my-orders.html">My Orders</a>
+          <a href="mailto:biomedionics@gmail.com">Email Support</a>
+          <a href="tel:+923474281701">Call Us</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <a href="shipping.html">Shipping Policy</a>
+          <a href="returns.html">Return Policy</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="blogs.html">Blog</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Biomedionics. All rights reserved.</span>
+      <span>Made with ❤️ in Pakistan 🇵🇰</span>
+    </div>
+  </div>
+</footer>
+<script src="js/shared.js"></script>
+<script>updateCartBadge();</script>
+</body>
+</html>
