@@ -1,0 +1,26 @@
+<!-- ═══ SHARED NAV — included in every page ═══ -->
+<div class="ann">🚀 Free shipping on orders over PKR 200,000 · <a href="track.html">Track your order →</a></div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html" title="Biomedionics Home">
+      <span style="background:var(--blue);color:#fff;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex-shrink:0">B</span>
+      Bio<span>medionics</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a class="nav-link" href="index.html" id="nl-home">Devices</a>
+      <a class="nav-link" href="services.html" id="nl-services">Services</a>
+      <a class="nav-link" href="blogs.html" id="nl-blogs">Blog</a>
+      <a class="nav-link" href="cart.html" id="nl-cart">Cart</a>
+      <a class="nav-link" href="checkout.html" id="nl-checkout">Checkout</a>
+      <a class="nav-link" href="my-orders.html" id="nl-history">My Orders</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;margin-left:auto;">
+      <input type="text" id="navSearch" placeholder="Search devices..." class="nav-search" oninput="handleNavSearch(this.value)" autocomplete="off"/>
+      <a class="nav-track-btn btn-outline" href="track.html">📦 Track</a>
+      <a class="nav-cart-btn" href="cart.html" id="navCartBtn">
+        🛒 Cart <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+      </a>
+    </div>
+    <button class="nav-mobile-btn" onclick="toggleMobileNav()" id="mobileMenuBtn">☰</button>
+  </div>
+</nav>
