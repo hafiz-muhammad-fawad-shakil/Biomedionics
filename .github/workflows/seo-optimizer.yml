@@ -1,0 +1,37 @@
+name: 🤖 Gemini SEO Auto-Optimizer
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1'  # Har Monday auto run
+
+jobs:
+  seo_optimize:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install Dependencies
+        run: pip install google-generativeai beautifulsoup4 lxml
+
+      - name: 🤖 Run SEO Optimizer
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python seo_optimizer.py
+
+      - name: 💾 Commit SEO Changes
+        run: |
+          git config --global user.name "Gemini SEO Bot"
+          git config --global user.email "seo-bot@biomedionics.live"
+          git add .
+          git diff --staged --quiet || git commit -m "🤖 Auto SEO improvement by Gemini AI"
+          git push
