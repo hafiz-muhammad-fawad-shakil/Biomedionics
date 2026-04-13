@@ -1,9 +1,9 @@
-name: 🤖 Gemini SEO Auto-Optimizer
+name: 🤖 Groq SEO Auto-Optimizer
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 1'  # Har Monday auto run
+    - cron: '0 0 * * 1'
 
 jobs:
   seo_optimize:
@@ -21,17 +21,17 @@ jobs:
           python-version: '3.11'
 
       - name: 📦 Install Dependencies
-        run: pip install google-generativeai beautifulsoup4 lxml
+        run: pip install groq
 
       - name: 🤖 Run SEO Optimizer
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python seo_optimizer.py
 
       - name: 💾 Commit SEO Changes
         run: |
-          git config --global user.name "Gemini SEO Bot"
+          git config --global user.name "Groq SEO Bot"
           git config --global user.email "seo-bot@biomedionics.live"
           git add .
-          git diff --staged --quiet || git commit -m "🤖 Auto SEO improvement by Gemini AI"
+          git diff --staged --quiet || git commit -m "🤖 Auto SEO improvement by Groq AI"
           git push
