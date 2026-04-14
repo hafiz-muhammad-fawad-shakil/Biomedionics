@@ -1,11 +1,11 @@
 import os
 import glob
 import json
+import time
 import datetime
-import google.generativeai as genai
+from groq import Groq
 
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-model = genai.GenerativeModel("gemini-2.0-flash")
+client = Groq(api_key=os.environ["GROQ_API_KEY"])
 
 SITE_INFO = """
 Website: Biomedionics.live
@@ -25,8 +25,7 @@ Keywords: medical devices Pakistan, Diabe-Neurosense, isometric muscle meter,
 # ============================================================
 def improve_seo(html_content, filename):
     print(f"  [SEO] Processing {filename}...")
-    prompt = f"""
-You are an expert SEO specialist for medical devices in Pakistan.
+    prompt = f"""You are an expert SEO specialist for medical devices in Pakistan.
 Improve this HTML file's SEO completely.
 
 Site Info:
@@ -50,18 +49,26 @@ Do ALL of these:
 9. Improve heading structure (H1, H2, H3) for SEO
 10. Add structured breadcrumb schema if applicable
 
-Return ONLY the complete improved HTML. No explanation. No markdown.
+Return ONLY the complete improved HTML. No explanation. No markdown. Start directly with <!DOCTYPE html>
 
 HTML:
-{html_content}
-"""
-    try:
-        response = model.generate_content(prompt)
-        result = response.text.replace("```html", "").replace("```", "").strip()
-        return result
-    except Exception as e:
-        print(f"  [SEO ERROR] {e}")
-        return html_content
+{html_content}"""
+
+    for attempt in range(3):
+        try:
+            response = client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=8000,
+                temperature=0.3
+            )
+            result = response.choices[0].message.content.strip()
+            result = result.replace("```html", "").replace("```", "").strip()
+            return result
+        except Exception as e:
+            print(f"  [SEO ERROR] Attempt {attempt+1}: {e}")
+            time.sleep(10)
+    return html_content
 
 
 # ============================================================
@@ -85,8 +92,7 @@ def generate_blog_post():
     week_num = today.isocalendar()[1]
     topic = blog_topics[week_num % len(blog_topics)]
 
-    prompt = f"""
-You are a medical content writer for Biomedionics Pakistan.
+    prompt = f"""You are a medical content writer for Biomedionics Pakistan.
 Write a complete SEO-optimized blog post HTML page.
 
 Site Info:
@@ -111,12 +117,17 @@ Requirements:
 7. Use same navbar style as this basic template:
    <nav><a href="/index.html">Home</a> | <a href="/blogs.html">Blog</a></nav>
 
-Return ONLY complete HTML page. No markdown. No explanation.
-"""
+Return ONLY complete HTML page. No markdown. No explanation. Start with <!DOCTYPE html>"""
 
     try:
-        response = model.generate_content(prompt)
-        html = response.text.replace("```html", "").replace("```", "").strip()
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=8000,
+            temperature=0.5
+        )
+        html = response.choices[0].message.content.strip()
+        html = html.replace("```html", "").replace("```", "").strip()
 
         filename = f"blogs/auto-{today.strftime('%Y-%m-%d')}-{topic[:30].lower().replace(' ','-').replace(':','')}.html"
         os.makedirs("blogs", exist_ok=True)
@@ -270,7 +281,7 @@ def generate_dashboard(scores_data, history):
   </div>
   <div class="chart-card">
     <h2><span class="dot"></span> Before vs After — All Pages</h2>
-    <p>SEO score per page before and after Gemini AI optimization</p>
+    <p>SEO score per page before and after Groq AI optimization</p>
     <div class="chart-wrap"><canvas id="barChart"></canvas></div>
   </div>
   <div class="trend-row">
@@ -293,7 +304,7 @@ def generate_dashboard(scores_data, history):
     <p>Which elements are now present across your site</p>
     <div class="checks-grid" id="checksGrid"></div>
   </div>
-  <div class="footer">biomedionics.live &nbsp;·&nbsp; Gemini SEO Bot &nbsp;·&nbsp; {today_str}</div>
+  <div class="footer">biomedionics.live &nbsp;·&nbsp; Groq SEO Bot &nbsp;·&nbsp; {today_str}</div>
 </div>
 <script>
 const pages      = {pages_js};
@@ -352,7 +363,7 @@ pages.forEach((p,i)=>{{
 # ============================================================
 print("=" * 55)
 print("  Biomedionics SEO Auto-Optimizer")
-print("  Powered by Gemini AI")
+print("  Powered by Groq AI (Llama 3.3 70B)")
 print("=" * 55)
 
 html_files = glob.glob("*.html") + glob.glob("**/*.html", recursive=True)
@@ -367,15 +378,23 @@ for filepath in html_files:
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()
+        if len(content.strip()) < 100:
+            print(f"  ⚠️ Skipping {filepath} — too small")
+            continue
         before_score, _ = calculate_seo_score(content, filepath)
         improved        = improve_seo(content, filepath)
-        after_score, _  = calculate_seo_score(improved, filepath)
-        with open(filepath, 'w', encoding='utf-8') as f:
-            f.write(improved)
-        scores_data.append({"file": filepath, "before": before_score, "score": after_score, "improvement": after_score - before_score})
-        print(f"  ✅ {filepath}: {before_score} → {after_score}/100 (+{after_score - before_score})")
+        if "<!DOCTYPE" in improved or "<html" in improved:
+            after_score, _ = calculate_seo_score(improved, filepath)
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(improved)
+            scores_data.append({"file": filepath, "before": before_score, "score": after_score, "improvement": after_score - before_score})
+            print(f"  ✅ {filepath}: {before_score} → {after_score}/100 (+{after_score - before_score})")
+        else:
+            print(f"  ⚠️ {filepath}: Invalid response, skipped")
+        time.sleep(4)
     except Exception as e:
         print(f"  ❌ Error in {filepath}: {e}")
+        time.sleep(5)
 
 print("\n[ FEATURE 2 ] Weekly Blog Post Generator")
 print("-" * 45)
@@ -385,15 +404,20 @@ if blog_file:
 
 print("\n[ FEATURE 3 ] SEO Score Tracker")
 print("-" * 45)
-report, history = save_seo_scores(scores_data)
+if scores_data:
+    report, history = save_seo_scores(scores_data)
+else:
+    report = {"average": 0}
+    history = []
 
 print("\n[ FEATURE 4 ] SEO Dashboard Generator")
 print("-" * 45)
-generate_dashboard(scores_data, history)
+if scores_data:
+    generate_dashboard(scores_data, history)
 
 print("\n" + "=" * 55)
 print("  OPTIMIZATION COMPLETE!")
-print(f"  Pages optimized : {len(html_files)}")
+print(f"  Pages optimized : {len(scores_data)}")
 print(f"  Blog posts added: 1")
 print(f"  Average Score   : {report['average']}/100")
 print("  Dashboard       : seo-dashboard.html ✅")
