@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en-PK">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="stylesheet" href="css/main.css"/>
+<title>Isometri Muscle Meter — Isometric Force Dynamometer Pakistan | Biomedionics</title>
+<meta name="description" content="Buy Isometri Muscle Meter in Pakistan. 7-parameter analysis: MVC, Peak Force, TTP, RFD, Fatigue Index, Impulse, %MVC. ±0.5% accuracy. Firebase cloud. ESP32. PKR 30,000."/>
+<meta name="keywords" content="isometri muscle meter pakistan, isometric dynamometer pakistan, muscle strength testing device, force dynamometer pakistan, MVC measurement device"/>
+<link rel="canonical" href="https://biomedionics.live/device-isometri.html"/>
+<meta property="og:title" content="Isometri Muscle Meter — Isometric Force Dynamometer Pakistan | Biomedionics"/>
+<meta property="og:description" content="Buy Isometri Muscle Meter in Pakistan. 7-parameter analysis: MVC, Peak Force, TTP, RFD, Fatigue Index, Impulse, %MVC. ±0.5% accuracy. Firebase cloud. ESP32. PKR 30,000."/>
+<meta property="og:url" content="https://biomedionics.live/device-isometri.html"/>
+<meta property="og:type" content="product"/>
+<meta property="og:image" content="https://biomedionics.live/android-chrome-512x512.png"/>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Product",
+  "name":"Isometri Muscle Meter",
+  "description":"Buy Isometri Muscle Meter in Pakistan. 7-parameter analysis: MVC, Peak Force, TTP, RFD, Fatigue Index, Impulse, %MVC. ±0.5% accuracy. Firebase cloud. ESP32. PKR 30,000.",
+  "brand":{"@type":"Brand","name":"Biomedionics"},
+  "offers":{"@type":"Offer","priceCurrency":"PKR","price":"30000","availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"Biomedionics"}},
+  "url":"https://biomedionics.live/device-isometri.html"
+}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5S9GW5JE67"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5S9GW5JE67');
+</script>
+<style>
+/* Additional styles for the live graph dashboard */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.stat-box {
+  background: var(--off);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  padding: 12px 14px;
+}
+.stat-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text3);
+  margin-bottom: 4px;
+}
+.stat-val {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--navy);
+}
+.stat-unit {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+.stat-mvc { border-color: #fde68a; background: #fffbeb; }
+.stat-mvc .stat-val { color: #d97706; }
+.stat-peak { border-color: #fde68a; background: #fffbeb; }
+.stat-peak .stat-val { color: #d97706; }
+.stat-ttp { border-color: #a7f3d0; background: #f0fdf4; }
+.stat-ttp .stat-val { color: #059669; }
+.stat-rfd { border-color: #bfdbfe; background: #eff6ff; }
+.stat-rfd .stat-val { color: #1a56db; }
+.stat-fi { border-color: #fecaca; background: #fff1f2; }
+.stat-fi .stat-val { color: #dc2626; }
+.stat-imp { border-color: #e9d5ff; background: #faf5ff; }
+.stat-imp .stat-val { color: #7c3aed; }
+.graph-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 28px;
+}
+.graph-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.graph-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--navy);
+}
+.graph-device {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+.live-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #dcfce7;
+  color: #166534;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.conn-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+.graph-export {
+  display: flex;
+  gap: 8px;
+}
+.btn-export {
+  background: var(--off);
+  border: 1px solid var(--border);
+  padding: 7px 14px;
+  border-radius: var(--radius2);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text2);
+  transition: .2s;
+  cursor: pointer;
+}
+.btn-export:hover { background: var(--border); }
+.graph-canvas-wrap {
+  position: relative;
+  height: 220px;
+  margin-bottom: 20px;
+}
+.connect-area {
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  border: 1px solid #bae6fd;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 28px;
+}
+.connect-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0369a1;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.conn-status-bar {
+  padding: 10px 16px;
+  border-radius: var(--radius2);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.conn-status-bar.waiting { background: #fef9c3; color: #854d0e; border: 1px solid #fde047; }
+.conn-status-bar.connected { background: #dcfce7; color: #166534; border: 1px solid #4ade80; }
+.conn-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius2);
+  font-size: 14px;
+  font-weight: 700;
+  transition: .2s;
+  border: none;
+  cursor: pointer;
+}
+.conn-btn.connect { background: var(--blue); color: #fff; }
+.conn-btn.connect:hover { background: var(--blue2); }
+.conn-btn.disconnect { background: #fee2e2; color: var(--red); border: 1px solid #fca5a5; }
+.conn-btn.disconnect:hover { background: #fecaca; }
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 480px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.modal-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  transition: .2s;
+  text-transform: uppercase;
+}
+.modal-input:focus { border-color: var(--blue); }
+.modal-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.btn-modal-cancel {
+  background: var(--off);
+  color: var(--text2);
+  padding: 12px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+.btn-modal-ok {
+  background: var(--blue);
+  color: #fff;
+  padding: 12px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+.spinner-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,.92);
+  z-index: 10000;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--border);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.spinner-msg {
+  font-size: 14px;
+  color: var(--text2);
+  max-width: 280px;
+  text-align: center;
+  line-height: 1.5;
+}
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--navy);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 2000;
+  transition: .35s;
+  white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ─── REPORT MODAL ─────────────────────────────────────────── */
+.rpt-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.rpt-overlay.open { display: flex; }
+.rpt-box {
+  background: #fff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 92vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 80px rgba(0,0,0,.25);
+}
+.rpt-head {
+  padding: 22px 24px 0;
+  flex-shrink: 0;
+}
+.rpt-head-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.rpt-head-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.rpt-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #64748b;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.rpt-close:hover { background: #f1f5f9; }
+.rpt-subtitle {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 14px;
+}
+.rpt-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 0;
+}
+.rpt-tab {
+  padding: 10px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #f8fafc;
+  color: #64748b;
+  border: none;
+  transition: .2s;
+}
+.rpt-tab.active { background: #1a56db; color: #fff; }
+.rpt-body {
+  padding: 20px 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+/* Form styles */
+.rpt-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.rpt-form-full { grid-column: 1 / -1; }
+.rpt-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 5px;
+  display: block;
+}
+.rpt-input, .rpt-select, .rpt-textarea {
+  width: 100%;
+  padding: 10px 13px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 9px;
+  font-size: 14px;
+  color: #1e293b;
+  background: #fff;
+  transition: .2s;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+.rpt-input:focus, .rpt-select:focus, .rpt-textarea:focus {
+  outline: none;
+  border-color: #1a56db;
+  box-shadow: 0 0 0 3px rgba(26,86,219,.1);
+}
+.rpt-textarea { resize: vertical; min-height: 80px; }
+/* Footer */
+.rpt-footer {
+  padding: 14px 24px 20px;
+  border-top: 1px solid #f1f5f9;
+  flex-shrink: 0;
+}
+.rpt-foot-row1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.rpt-btn-cancel {
+  padding: 11px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: .2s;
+}
+.rpt-btn-cancel:hover { background: #e2e8f0; }
+.rpt-btn-next {
+  padding: 11px;
+  background: #1a56db;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: .2s;
+}
+.rpt-btn-next:hover { background: #1d4ed8; }
+.rpt-btn-download {
+  width: 100%;
+  padding: 13px;
+  background: #0f172a;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.rpt-btn-download:hover { background: #1e293b; }
+/* Preview / report card */
+.rpt-preview-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.rpt-preview-inner {
+  padding: 18px;
+  max-height: 340px;
+  overflow-y: auto;
+}
+.rpt-brand-line {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #1a56db;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.rpt-doc-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+.rpt-doc-meta {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #1a56db;
+}
+.rpt-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.rpt-info-item label {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94a3b8;
+  display: block;
+  margin-bottom: 2px;
+}
+.rpt-info-item span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+}
+.rpt-params-title {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #374151;
+  margin-bottom: 10px;
+}
+.rpt-params-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.rpt-param-box {
+  border: 1px solid #f1f5f9;
+  border-radius: 8px;
+  padding: 10px 8px;
+  text-align: center;
+  background: #fafafa;
+}
+.rpt-param-num {
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+.rpt-param-bar {
+  height: 3px;
+  border-radius: 2px;
+  margin: 4px auto;
+  width: 60%;
+}
+.rpt-param-val {
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 2px 0;
+}
+.rpt-param-unit {
+  font-size: 10px;
+  color: #94a3b8;
+}
+.rpt-gen-footer {
+  font-size: 11px;
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 8px;
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="ann">🚀 Free shipping on orders over PKR 200,000 · <a href="track.html">Track your order →</a></div>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="logo-icon">💪</span>
+      <span class="logo-text">Bio<span>medionics</span></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a class="nav-link" href="index.html">Devices</a>
+      <a class="nav-link" href="services.html">Services</a>
+      <a class="nav-link" href="blogs.html">Blog</a>
+      <a class="nav-link" href="cart.html">Cart</a>
+      <a class="nav-link" href="checkout.html">Checkout</a>
+      <a class="nav-link" href="my-orders.html">My Orders</a>
+    </div>
+    <div class="nav-right">
+      <input type="text" class="nav-search-input" placeholder="Search devices..." id="navSearchInput" onkeypress="if(event.key==='Enter')handleNavSearch(this.value)"/>
+      <a class="nav-track-btn" href="track.html">📦 Track</a>
+      <a class="nav-cart-btn" href="cart.html">🛒 Cart <span class="cart-badge" id="cartBadge" style="display:none">0</span></a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a class="nav-link" href="index.html">Devices</a>
+  <a class="nav-link" href="services.html">Services</a>
+  <a class="nav-link" href="blogs.html">Blog</a>
+  <a class="nav-link" href="cart.html">Cart</a>
+  <a class="nav-link" href="checkout.html">Checkout</a>
+  <a class="nav-link" href="my-orders.html">My Orders</a>
+  <input type="text" class="nav-search-input" placeholder="Search devices..." onkeypress="if(event.key==='Enter')handleNavSearch(this.value)" style="margin-top:8px;width:100%"/>
+  <a href="track.html" style="display:block;margin-top:8px;padding:12px 16px;background:#f8fafc;border-radius:8px;font-size:14px;font-weight:600;color:var(--text2);text-decoration:none;">📦 Track Order</a>
+</div>
+
+<!-- HERO SECTION -->
+<div class="dev-page-hero">
+  <div class="dev-page-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> › <a href="index.html">Devices</a> › Isometri Muscle Meter</div>
+    <div class="detail-grid-2col">
+      <div>
+        <div class="detail-img-wrap" id="devImgWrap">
+          <span style="font-size:120px">💪</span>
+        </div>
+      </div>
+      <div>
+        <span class="badge-pill badge-new">New</span>
+        <div class="detail-cat">Force Measurement</div>
+        <h1 class="detail-name" id="devName">Isometri Muscle Meter</h1>
+        <div class="detail-price-row">
+          <div class="detail-price" id="devPrice">PKR 30,000</div>
+          <span class="detail-stock" id="devStock">In Stock (18)</span>
+        </div>
+        <div class="detail-desc" id="devDesc">Medical-grade isometric dynamometer powered by ESP32 with Firebase real-time cloud streaming. 7-parameter analysis: MVC, Peak Force, TTP, RFD, Fatigue Index, Impulse, and %MVC.</div>
+        <div class="qty-row">
+          <span class="qty-label">Quantity</span>
+          <div class="qty-ctrl">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <span class="qty-num" id="qtyNum">1</span>
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+        </div>
+        <div class="detail-btns">
+          <button class="btn-add-cart" onclick="addToCartNow()">🛒 Add to Cart</button>
+          <button class="btn-buy-now" onclick="buyNow()">⚡ Buy Now</button>
+        </div>
+        <div style="margin-top:16px;font-size:12px;color:var(--text2);display:flex;gap:14px;flex-wrap:wrap">
+          <span>🚚 Free shipping over PKR 200,000</span>
+          <span>↩️ 7-day returns</span>
+          <span>📞 <a href="tel:+923474281701" style="color:var(--blue)">Call for info</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECT DEVICE SECTION (Isometri only) -->
+<div style="max-width:1100px;margin:0 auto;padding:20px">
+  <div id="connectArea">
+    <div class="connect-area">
+      <div class="connect-title">📡 Real-Time Data Connection</div>
+      <div class="conn-status-bar waiting" id="connStatusBar" style="display:none">
+        <span class="conn-dot"></span><span id="connStatusMsg">Connecting...</span>
+      </div>
+      <button class="conn-btn connect" id="connectBtn" onclick="onConnectClick()">🔗 Connect Device</button>
+    </div>
+
+    <!-- LIVE GRAPH DASHBOARD -->
+    <div class="graph-card" id="graphCard" style="display:none">
+      <div class="graph-header">
+        <div>
+          <div class="graph-title">Real-Time Force Measurement</div>
+          <div class="graph-device" id="gDevId">Device: --</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <div class="live-chip"><span class="conn-dot"></span> LIVE</div>
+          <div class="graph-export">
+            <button class="btn-export" onclick="doExportPNG()">📷 PNG</button>
+            <button class="btn-export" onclick="doExportExcel()">📊 Excel</button>
+            <button class="btn-export btn-gen-report" onclick="openReportModal()" style="background:#16a34a;color:#fff;border-color:#16a34a;">📋 Generate Report</button>
+          </div>
+        </div>
+      </div>
+      <div class="graph-canvas-wrap">
+        <canvas id="forceChart"></canvas>
+      </div>
+      
+      <!-- 7 Parameter Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-box"><div class="stat-tag">Live</div><div class="stat-val" id="sCur">--</div><div class="stat-unit">Current (N)</div></div>
+        <div class="stat-box stat-mvc"><div class="stat-tag">1. MVC</div><div class="stat-val" id="sMVC">--</div><div class="stat-unit">Max Vol. Contraction (N)</div></div>
+        <div class="stat-box stat-peak"><div class="stat-tag">2. Peak</div><div class="stat-val" id="sPeak">--</div><div class="stat-unit">Peak Force (N)</div></div>
+        <div class="stat-box"><div class="stat-tag">%MVC</div><div class="stat-val" id="sPctMVC">--</div><div class="stat-unit">% of MVC</div></div>
+        <div class="stat-box stat-ttp"><div class="stat-tag">3. TTP</div><div class="stat-val" id="sTTP">--</div><div class="stat-unit">Time to Peak (s)</div></div>
+        <div class="stat-box stat-rfd"><div class="stat-tag">4. RFD</div><div class="stat-val" id="sRFD">--</div><div class="stat-unit">Rate Force Dev (N/s)</div></div>
+        <div class="stat-box stat-fi"><div class="stat-tag">5. Fatigue</div><div class="stat-val" id="sFI">--</div><div class="stat-unit">Fatigue Index (%)</div></div>
+        <div class="stat-box stat-imp"><div class="stat-tag">6. Impulse</div><div class="stat-val" id="sImpulse">--</div><div class="stat-unit">Force Impulse (Ns)</div></div>
+      </div>
+      
+      <!-- Additional Stats Row -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px">
+        <div class="stat-box"><div class="stat-tag">Avg Force</div><div class="stat-val" id="sAvg">--</div><div class="stat-unit">N</div></div>
+        <div class="stat-box"><div class="stat-tag">Max RFD</div><div class="stat-val" id="sRFDmax">--</div><div class="stat-unit">N/s</div></div>
+        <div class="stat-box"><div class="stat-tag">Readings</div><div class="stat-val" id="sReadings">--</div><div class="stat-unit">count</div></div>
+        <div class="stat-box"><div class="stat-tag">Duration</div><div class="stat-val" id="sDuration">--</div><div class="stat-unit">seconds</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPECIFICATIONS -->
+<div style="max-width:1100px;margin:0 auto;padding:40px 20px">
+  <h2 style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:16px">Technical Specifications</h2>
+  <div class="spec-table" id="specTable">
+    <div class="spec-row"><div class="spec-label">Force Range</div><div class="spec-val">0 – 500 N</div></div>
+    <div class="spec-row"><div class="spec-label">Accuracy</div><div class="spec-val">±0.5%</div></div>
+    <div class="spec-row"><div class="spec-label">Sensor</div><div class="spec-val">Load Cell + HX711</div></div>
+    <div class="spec-row"><div class="spec-label">Microcontroller</div><div class="spec-val">ESP32</div></div>
+    <div class="spec-row"><div class="spec-label">Cloud</div><div class="spec-val">Firebase Realtime DB</div></div>
+    <div class="spec-row"><div class="spec-label">Parameters</div><div class="spec-val">7 Clinical (MVC, Peak, TTP, RFD, FI, Impulse, %MVC)</div></div>
+    <div class="spec-row"><div class="spec-label">Export</div><div class="spec-val">PNG + Excel</div></div>
+    <div class="spec-row"><div class="spec-label">Firmware</div><div class="spec-val">v4.0</div></div>
+    <div class="spec-row"><div class="spec-label">Connectivity</div><div class="spec-val">Wi-Fi (2.4 GHz)</div></div>
+    <div class="spec-row"><div class="spec-label">Power</div><div class="spec-val">USB-C / Li-Ion 4000mAh</div></div>
+  </div>
+</div>
+
+<!-- FURTHER READING CTA -->
+<div style="margin: 50px auto; max-width: 800px; padding: 40px 20px; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 20px; text-align: center;">
+    <div style="display: inline-block; padding: 8px 16px; background: rgba(26, 86, 219, 0.1); color: var(--blue); border-radius: 50px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">Further Reading</div>
+    <h2 style="color: var(--navy); font-size: 26px; font-weight: 800; margin-bottom: 15px;">Isometric Muscle Force Measurement</h2>
+    <p style="color: #475569; font-size: 16px; line-height: 1.6; margin-bottom: 30px; max-width: 550px; margin-left: auto; margin-right: auto;">Discover the clinical significance of MVC, RFD, and Fatigue Index. A complete guide for healthcare professionals.</p>
+    <a href="isometric-testing-guide.html" style="display: inline-block; padding: 16px 32px; background-color: var(--blue); color: #ffffff; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 16px;">Explore Full Clinical Guide →</a>
+</div>
+
+<!-- SIMILAR DEVICES -->
+<div class="similar-section">
+  <div style="text-align:center;margin-bottom:28px">
+    <div style="font-size:13px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Related Products</div>
+    <h2 style="font-size:22px;font-weight:800;color:var(--navy)">You Might Also Like</h2>
+  </div>
+  <div class="similar-grid">
+    <a href="device-biosoft.html" class="similar-card">
+      <div style="margin-bottom:12px;height:140px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border-radius:8px;font-size:60px">🖨️</div>
+      <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px">BioSoft I</div>
+      <div style="font-size:13px;color:var(--blue);font-weight:600">PKR 100,000</div>
+    </a>
+    <a href="device-diabsense.html" class="similar-card">
+      <div style="margin-bottom:12px;height:140px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-radius:8px;font-size:60px">🩺</div>
+      <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px">Diabe-Neurosense</div>
+      <div style="font-size:13px;color:var(--blue);font-weight:600">PKR 90,000</div>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">Biomedionics</div>
+        <p>Advanced medical devices engineered for precision diagnostics and real-time clinical monitoring.</p>
+        <div class="footer-contact">
+          <a href="https://maps.google.com/?q=Narowal+Muridke+Road+Punjab+Pakistan" target="_blank">📍 Narowal - Muridke Road, Punjab, Pakistan</a>
+          <a href="mailto:biomedionics@gmail.com">📧 biomedionics@gmail.com</a>
+          <a href="tel:+923474281701">📞 +92 347 4281701</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Products</div>
+        <div class="footer-links">
+          <a href="device-biosoft.html">BioSoft I</a>
+          <a href="device-diabsense.html">Diabe-Neurosense</a>
+          <a href="device-isometri.html">Isometri Muscle Meter</a>
+          <a href="services.html">Repair Services</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Support</div>
+        <div class="footer-links">
+          <a href="track.html">Track Order</a>
+          <a href="my-orders.html">My Orders</a>
+          <a href="mailto:biomedionics@gmail.com">Email Support</a>
+          <a href="tel:+923474281701">Call Us</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <a href="shipping.html">Shipping Policy</a>
+          <a href="returns.html">Return Policy</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="blogs.html">Blog</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Biomedionics. All rights reserved.</span>
+      <span>Made with ❤️ in Pakistan 🇵🇰</span>
+    </div>
+  </div>
+</footer>
+
+<!-- PATIENT SESSION REPORT MODAL -->
+<div class="rpt-overlay" id="mReport">
+  <div class="rpt-box">
+    <div class="rpt-head">
+      <div class="rpt-head-top">
+        <div class="rpt-head-title">📋 Patient Session Report</div>
+        <button class="rpt-close" onclick="closeReportModal()">✕</button>
+      </div>
+      <div class="rpt-subtitle">Fill patient details — report will be generated with all 7 parameters from this session.</div>
+      <div class="rpt-tabs">
+        <button class="rpt-tab active" id="rptTab1" onclick="switchRptTab(1)">1. Patient Info</button>
+        <button class="rpt-tab" id="rptTab2" onclick="switchRptTab(2)">2. Preview &amp; Save</button>
+      </div>
+    </div>
+
+    <!-- STEP 1: PATIENT INFO -->
+    <div class="rpt-body" id="rptStep1">
+      <div class="rpt-form-grid">
+        <div>
+          <label class="rpt-label">Patient Name *</label>
+          <input class="rpt-input" id="rPtName" type="text" placeholder="Muhammad Ali"/>
+        </div>
+        <div>
+          <label class="rpt-label">Age *</label>
+          <input class="rpt-input" id="rPtAge" type="number" placeholder="35" min="1" max="120"/>
+        </div>
+        <div>
+          <label class="rpt-label">Gender *</label>
+          <select class="rpt-select" id="rPtGender">
+            <option value="">Select...</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="rpt-label">MR / Patient ID</label>
+          <input class="rpt-input" id="rPtMR" type="text" placeholder="MR-001 (optional)"/>
+        </div>
+        <div>
+          <label class="rpt-label">Diagnosis / Condition</label>
+          <input class="rpt-input" id="rPtDiag" type="text" placeholder="e.g. Post ACL Surgery"/>
+        </div>
+        <div>
+          <label class="rpt-label">Muscle Group Tested</label>
+          <select class="rpt-select" id="rPtMuscle">
+            <option>Grip Strength</option>
+            <option>Quadriceps</option>
+            <option>Hamstrings</option>
+            <option>Hip Flexors</option>
+            <option>Ankle Plantar Flexors</option>
+            <option>Shoulder Abductors</option>
+            <option>Biceps</option>
+            <option>Triceps</option>
+            <option>Core / Trunk</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="rpt-label">Clinician Name *</label>
+          <input class="rpt-input" id="rPtClinician" type="text" placeholder="Dr. Ahmed Khan"/>
+        </div>
+        <div>
+          <label class="rpt-label">Session Type</label>
+          <select class="rpt-select" id="rPtSessionType">
+            <option>Baseline Assessment</option>
+            <option>Follow-up</option>
+            <option>Pre-Surgery</option>
+            <option>Post-Surgery</option>
+            <option>Rehabilitation</option>
+            <option>Research</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="rpt-form-full">
+          <label class="rpt-label">Clinical Notes</label>
+          <textarea class="rpt-textarea" id="rPtNotes" placeholder="Any relevant observations, medications, or clinical context..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: PREVIEW -->
+    <div class="rpt-body" id="rptStep2" style="display:none">
+      <div class="rpt-preview-card">
+        <div class="rpt-preview-inner" id="rptPreviewContent">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="rpt-footer">
+      <!-- Step 1 footer -->
+      <div id="rptFoot1">
+        <div class="rpt-foot-row1">
+          <button class="rpt-btn-cancel" onclick="closeReportModal()">Cancel</button>
+          <button class="rpt-btn-next" onclick="rptGoPreview()">Next — Preview Report →</button>
+        </div>
+      </div>
+      <!-- Step 2 footer -->
+      <div id="rptFoot2" style="display:none">
+        <div class="rpt-foot-row1">
+          <button class="rpt-btn-cancel" onclick="switchRptTab(1)">✏️ Edit Info</button>
+          <button class="rpt-btn-next" onclick="rptPrintPDF()">🖨️ Print / PDF</button>
+        </div>
+        <button class="rpt-btn-download" onclick="rptDownload()">⬇ Download Report</button>
+        <div style="font-size:11px;color:#94a3b8;text-align:center;margin-top:8px">File downloads &amp; auto-saves to Admin panel</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECT MODAL -->
+<div class="modal-overlay" id="mConnect">
+  <div class="modal-box">
+    <div class="modal-title">🔗 Connect Your Device</div>
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:12px;margin-bottom:16px;font-size:13px;color:#0369a1;">
+      <b>First Time Setup:</b><br>
+      1. Device ON karo<br>
+      2. Phone WiFi → <b>"Biomedionics_Setup"</b> connect karo<br>
+      3. WiFi password dalo → Save<br>
+      4. Device restart → ID OLED/Serial pe dikhega<br>
+      <hr style="border-color:#bae6fd;margin:8px 0">
+      <b>Already Setup:</b> Device ON karo → ID enter karo below
+    </div>
+    <input class="modal-input" type="text" id="devIdInput" placeholder="A842E3916050" maxlength="12" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')doConnect()"/>
+    <p style="font-size:12px;color:var(--text3);text-align:center;margin-bottom:16px">12-character ID shown on OLED screen or Serial Monitor</p>
+    <div class="modal-btns">
+      <button class="btn-modal-cancel" onclick="closeModal('mConnect')">Cancel</button>
+      <button class="btn-modal-ok" onclick="doConnect()">Connect →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SPINNER -->
+<div id="spinnerOverlay" class="spinner-overlay">
+  <div class="spinner"></div>
+  <div class="spinner-title" id="spinTitle">Connecting...</div>
+  <div class="spinner-msg" id="spinMsg"></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- SHARED JS -->
+<script src="js/shared.js"></script>
+
+<!-- FIREBASE INIT -->
+<script>
+const fbApp = firebase.initializeApp({
+  apiKey: "AIzaSyBJ0jSR1nyRtZmOrsYTd0fxT0jvVxUudm8",
+  authDomain: "biomedionics-5d664.firebaseapp.com",
+  databaseURL: "https://biomedionics-5d664-default-rtdb.firebaseio.com",
+  projectId: "biomedionics-5d664",
+  storageBucket: "biomedionics-5d664.firebasestorage.app",
+  messagingSenderId: "59681602646",
+  appId: "1:59681602646:web:4fe07cdef3f06173460ff7"
+});
+const db = firebase.database(fbApp);
+</script>
+
+<!-- PAGE SPECIFIC JS -->
+<script>
+// Device data
+const devData = {
+  id: 'isometri',
+  name: 'Isometri Muscle Meter',
+  pricePKR: 30000,
+  stock: 18,
+  emoji: '💪'
+};
+
+let qty = 1;
+function changeQty(d) { qty = Math.max(1, Math.min(10, qty + d)); document.getElementById('qtyNum').textContent = qty; }
+function addToCartNow() { if (typeof addToCart === 'function') addToCart({ id: devData.id, name: devData.name, pricePKR: devData.pricePKR, qty, emoji: devData.emoji }); else alert('Added to cart!'); }
+function buyNow() { addToCartNow(); setTimeout(() => window.location.href = 'checkout.html', 300); }
+
+// Connection state
+let connected = false, connectedID = '', fbListener = null, myChart = null;
+let chartData = { labels: [], values: [] };
+let ws = { mvc:0, peak:0, ttp:null, rfd:0, rfdMax:0, fi:0, impulse:0, avg:0, readings:0, pctMVC:0, sessionStart:null };
+
+// Modal & UI
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2800); }
+function showSpinner(title, msg) { document.getElementById('spinTitle').textContent = title; document.getElementById('spinMsg').textContent = msg; document.getElementById('spinnerOverlay').style.display = 'flex'; }
+function hideSpinner() { document.getElementById('spinnerOverlay').style.display = 'none'; }
+
+// Connect flow
+function onConnectClick() {
+  if (connected) doDisconnect();
+  else document.getElementById('mConnect').classList.add('open');
+}
+
+async function doConnect() {
+  const id = document.getElementById('devIdInput').value.trim().toUpperCase();
+  if (id.length !== 12) { showToast('Device ID must be 12 characters'); return; }
+  closeModal('mConnect');
+  showSpinner('Connecting to Device...', 'Looking up device ID: ' + id);
+  
+  try {
+    const snap = await db.ref('/dynometer/' + id).get();
+    if (!snap.exists()) { hideSpinner(); showToast('Device not found'); return; }
+    
+    const deviceData = snap.val();
+    if (deviceData.status !== 'waiting') { hideSpinner(); showToast('Device offline. Turn ON first.'); return; }
+    
+    document.getElementById('spinTitle').textContent = 'Device Found!';
+    document.getElementById('spinMsg').textContent = 'ID: ' + id + '\nWiFi: ' + (deviceData.ssid||'--') + '\nFirmware: ' + (deviceData.firmware||'v4') + '\nConnecting...';
+    
+    await db.ref('/dynometer/' + id + '/status').set('connecting');
+    await new Promise(r => setTimeout(r, 2000));
+    await db.ref('/dynometer/' + id + '/status').set('connected');
+    
+    connectedID = id; connected = true;
+    hideSpinner();
+    
+    document.getElementById('connectBtn').className = 'conn-btn disconnect';
+    document.getElementById('connectBtn').textContent = '🔌 Disconnect';
+    
+    const bar = document.getElementById('connStatusBar');
+    bar.style.display = 'flex';
+    bar.classList.remove('waiting');
+    bar.classList.add('connected');
+    document.getElementById('connStatusMsg').textContent = 'LIVE — ' + id;
+    
+    document.getElementById('gDevId').textContent = 'Device: ' + id + '  |  WiFi: ' + (deviceData.ssid||'--') + '  |  FW: ' + (deviceData.firmware||'v4');
+    document.getElementById('graphCard').style.display = 'block';
+    
+    initChart();
+    resetSessionStats();
+    startListener(id);
+    showToast('Device connected!');
+  } catch(e) {
+    hideSpinner();
+    showToast('Connection error: ' + e.message);
+  }
+}
+
+async function doDisconnect() {
+  if (connectedID) {
+    try { await db.ref('/dynometer/' + connectedID + '/status').set('disconnected'); } catch(e) {}
+    setTimeout(async () => { try { await db.ref('/dynometer/' + connectedID + '/status').set('waiting'); } catch(e) {} }, 1500);
+  }
+  stopListener();
+  connected = false; connectedID = '';
+  
+  document.getElementById('connectBtn').className = 'conn-btn connect';
+  document.getElementById('connectBtn').textContent = '🔗 Connect Device';
+  document.getElementById('connStatusBar').style.display = 'none';
+  document.getElementById('graphCard').style.display = 'none';
+  
+  if (myChart) { myChart.destroy(); myChart = null; }
+  chartData = { labels: [], values: [] };
+  resetSessionStats();
+  showToast('Device disconnected');
+}
+
+// Chart
+function initChart() {
+  const ctx = document.getElementById('forceChart').getContext('2d');
+  if (myChart) myChart.destroy();
+  myChart = new Chart(ctx, {
+    type: 'line',
+    data: { labels: chartData.labels, datasets: [{ label: 'Force (N)', data: chartData.values, borderColor: '#1a56db', backgroundColor: 'rgba(26,86,219,.08)', tension: .4, fill: true, pointRadius: 3, pointBackgroundColor: '#1a56db' }] },
+    options: {
+      responsive: true, maintainAspectRatio: false, animation: { duration: 0 },
+      plugins: { legend: { display: false } },
+      scales: { x: { grid: { color: '#f1f5f9' }, ticks: { maxTicksLimit: 8 } }, y: { grid: { color: '#f1f5f9' }, beginAtZero: true } }
+    }
+  });
+}
+
+function pushPoint(label, val, data = {}) {
+  const MAX = 60;
+  chartData.labels.push(label);
+  chartData.values.push(val);
+  if (chartData.labels.length > MAX) { chartData.labels.shift(); chartData.values.shift(); }
+  if (myChart) myChart.update('none');
+  
+  ws.readings++;
+  if (!ws.sessionStart) ws.sessionStart = Date.now();
+  if (data.mvc_N != null) ws.mvc = data.mvc_N;
+  if (data.peakN != null) ws.peak = data.peakN;
+  if (data.timeToPeakS != null) ws.ttp = data.timeToPeakS;
+  if (data.rfd != null) ws.rfd = data.rfd;
+  if (data.rfdMax != null) ws.rfdMax = data.rfdMax;
+  if (data.fatigueIndex != null) ws.fi = data.fatigueIndex;
+  if (data.forceImpulse != null) ws.impulse = data.forceImpulse;
+  if (data.avgForce != null) ws.avg = data.avgForce;
+  if (data.pctMVC != null) ws.pctMVC = data.pctMVC;
+  updateStats();
+}
+
+function resetSessionStats() { ws = { mvc:0, peak:0, ttp:null, rfd:0, rfdMax:0, fi:0, impulse:0, avg:0, readings:0, pctMVC:0, sessionStart:null }; }
+
+function updateStats() {
+  const v = chartData.values;
+  if (!v.length) return;
+  const cur = v[v.length-1];
+  const dur = ws.sessionStart ? ((Date.now() - ws.sessionStart) / 1000).toFixed(1) : '--';
+  const set = (id, val, suf='') => { const el = document.getElementById(id); if (el) el.textContent = (val !== null && val !== undefined && val !== 0) ? (typeof val === 'number' ? val.toFixed(2) + suf : val + suf) : '--'; };
+  set('sCur', cur, ' N'); set('sMVC', ws.mvc, ' N'); set('sPeak', ws.peak, ' N');
+  set('sPctMVC', ws.pctMVC, '%'); set('sTTP', ws.ttp, ' s');
+  set('sRFD', ws.rfd, ' N/s'); set('sFI', ws.fi, '%'); set('sImpulse', ws.impulse, ' Ns');
+  set('sAvg', ws.avg, ' N'); set('sRFDmax', ws.rfdMax, ' N/s');
+  document.getElementById('sReadings').textContent = ws.readings;
+  document.getElementById('sDuration').textContent = dur !== '--' ? dur + ' s' : '--';
+}
+
+// Firebase listener
+function startListener(deviceId) {
+  stopListener();
+  fbListener = db.ref('/dynometer/' + deviceId + '/readings').limitToLast(1).on('child_added', snap => {
+    const d = snap.val();
+    if (!d || d.force == null) return;
+    pushPoint(new Date().toLocaleTimeString(), parseFloat(d.force.toFixed(3)), d);
+  });
+}
+
+function stopListener() {
+  if (connectedID && fbListener) {
+    db.ref('/dynometer/' + connectedID + '/readings').off('child_added', fbListener);
+    fbListener = null;
+  }
+}
+
+// Export
+function doExportPNG() {
+  if (!chartData.values.length) { showToast('No data yet'); return; }
+  html2canvas(document.getElementById('graphCard'), { backgroundColor: '#fff', scale: 2 }).then(c => {
+    const a = document.createElement('a'); a.download = 'isometri_' + connectedID + '_' + Date.now() + '.png'; a.href = c.toDataURL(); a.click();
+  });
+  showToast('PNG exported!');
+}
+
+function doExportExcel() {
+  if (!chartData.values.length) { showToast('No data yet'); return; }
+  const ftRows = chartData.labels.map((t, i) => ({ 'Time': t, 'Force (N)': chartData.values[i] }));
+  const summRows = [
+    { 'Parameter': 'MVC', 'Value': ws.mvc, 'Unit': 'N' },
+    { 'Parameter': 'Peak', 'Value': ws.peak, 'Unit': 'N' },
+    { 'Parameter': 'TTP', 'Value': ws.ttp, 'Unit': 's' },
+    { 'Parameter': 'RFD Max', 'Value': ws.rfdMax, 'Unit': 'N/s' },
+    { 'Parameter': 'Fatigue', 'Value': ws.fi, 'Unit': '%' },
+    { 'Parameter': 'Impulse', 'Value': ws.impulse, 'Unit': 'Ns' },
+    { 'Parameter': 'Readings', 'Value': ws.readings, 'Unit': 'count' }
+  ];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(ftRows), 'Force-Time');
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(summRows), 'Summary');
+  XLSX.writeFile(wb, 'isometri_' + connectedID + '_' + new Date().toISOString().slice(0,10) + '.xlsx');
+  showToast('Excel exported!');
+}
+
+// Nav search
+function handleNavSearch(q) { if (q && q.trim()) window.location.href = 'index.html?search=' + encodeURIComponent(q.trim()); }
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof updateCartBadge === 'function') updateCartBadge();
+  
+  db.ref('/devices/isometri').once('value').then(snap => {
+    if (!snap.exists()) return;
+    const d = snap.val();
+    if (d.pricePKR) { devData.pricePKR = d.pricePKR; document.getElementById('devPrice').textContent = 'PKR ' + d.pricePKR.toLocaleString(); }
+    if (d.stock) { devData.stock = d.stock; document.getElementById('devStock').textContent = 'In Stock (' + d.stock + ')'; }
+    if (d.desc) document.getElementById('devDesc').textContent = d.desc;
+    if (d.name) { devData.name = d.name; document.getElementById('devName').textContent = d.name; }
+    if (d.specs) document.getElementById('specTable').innerHTML = d.specs.map(s => `<div class="spec-row"><div class="spec-label">${s.l}</div><div class="spec-val">${s.v}</div></div>`).join('');
+    if (d.imgUrl) document.getElementById('devImgWrap').innerHTML = `<img src="${d.imgUrl}" alt="${d.name}" style="max-width:85%;max-height:320px;object-fit:contain" onerror="this.parentElement.innerHTML='<span style=\\'font-size:120px\\'>💪</span>'"/>`;
+  });
+  
+  // Hamburger
+  const h = document.getElementById('navHamburger'), m = document.getElementById('navMobileMenu');
+  if (h && m) { h.addEventListener('click', () => { h.classList.toggle('open'); m.classList.toggle('open'); }); }
+  
+  // Enter key in modal
+  document.getElementById('devIdInput').addEventListener('keypress', e => { if (e.key === 'Enter') doConnect(); });
+});
+
+// ─── REPORT MODAL ────────────────────────────────────────────
+function openReportModal() {
+  if (!connected) { showToast('Connect a device first'); return; }
+  document.getElementById('mReport').classList.add('open');
+  switchRptTab(1);
+}
+
+function closeReportModal() {
+  document.getElementById('mReport').classList.remove('open');
+}
+
+function switchRptTab(n) {
+  document.getElementById('rptTab1').classList.toggle('active', n === 1);
+  document.getElementById('rptTab2').classList.toggle('active', n === 2);
+  document.getElementById('rptStep1').style.display = n === 1 ? '' : 'none';
+  document.getElementById('rptStep2').style.display = n === 2 ? '' : 'none';
+  document.getElementById('rptFoot1').style.display = n === 1 ? '' : 'none';
+  document.getElementById('rptFoot2').style.display = n === 2 ? '' : 'none';
+}
+
+function rptGoPreview() {
+  const name = document.getElementById('rPtName').value.trim();
+  const age  = document.getElementById('rPtAge').value.trim();
+  const gender = document.getElementById('rPtGender').value;
+  const clinician = document.getElementById('rPtClinician').value.trim();
+  if (!name)     { showToast('Patient Name is required'); return; }
+  if (!age)      { showToast('Age is required'); return; }
+  if (!gender)   { showToast('Please select Gender'); return; }
+  if (!clinician){ showToast('Clinician Name is required'); return; }
+
+  buildReportPreview();
+  switchRptTab(2);
+}
+
+function rptVal(v, unit='', dec=2) {
+  if (v === null || v === undefined || v === 0 || v === '--') return '--';
+  const num = parseFloat(v);
+  return isNaN(num) ? '--' : num.toFixed(dec) + (unit ? ' ' + unit : '');
+}
+
+function buildReportPreview() {
+  const ptName    = document.getElementById('rPtName').value.trim() || '--';
+  const ptAge     = document.getElementById('rPtAge').value.trim() || '--';
+  const ptGender  = document.getElementById('rPtGender').value || '--';
+  const ptMR      = document.getElementById('rPtMR').value.trim() || '—';
+  const ptDiag    = document.getElementById('rPtDiag').value.trim() || '—';
+  const ptMuscle  = document.getElementById('rPtMuscle').value || '--';
+  const ptClin    = document.getElementById('rPtClinician').value.trim() || '--';
+  const ptType    = document.getElementById('rPtSessionType').value || 'Baseline Assessment';
+  const ptNotes   = document.getElementById('rPtNotes').value.trim();
+  const now       = new Date();
+  const dateStr   = now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) + ' | ' + now.toLocaleTimeString();
+
+  const params = [
+    { n:'1. MVC',      bar:'#d97706', val: rptVal(ws.mvc,'N'),        unit:'N'   },
+    { n:'2. Peak',     bar:'#d97706', val: rptVal(ws.peak,'N'),       unit:'N'   },
+    { n:'3. TTP',      bar:'#059669', val: rptVal(ws.ttp,'s'),        unit:'s'   },
+    { n:'4. RFD Max',  bar:'#1a56db', val: rptVal(ws.rfdMax,'N/s'),   unit:'N/s' },
+    { n:'5. Fatigue',  bar:'#dc2626', val: rptVal(ws.fi,'%'),         unit:'%'   },
+    { n:'6. Impulse',  bar:'#7c3aed', val: rptVal(ws.impulse,'Ns'),   unit:'Ns'  },
+    { n:'%MVC',        bar:'#0284c7', val: rptVal(ws.pctMVC,'%'),     unit:'%'   },
+  ];
+
+  const paramCards = params.map(p => `
+    <div class="rpt-param-box">
+      <div class="rpt-param-num">${p.n}</div>
+      <div class="rpt-param-bar" style="background:${p.bar}"></div>
+      <div class="rpt-param-val">${p.val !== '--' ? p.val.split(' ')[0] : '--'}</div>
+      <div class="rpt-param-unit">${p.unit}</div>
+    </div>`).join('');
+
+  const notesRow = ptNotes ? `<div style="margin-top:10px;padding:10px;background:#f8fafc;border-radius:8px;font-size:12px;color:#374151;border-left:3px solid #1a56db"><b>Clinical Notes:</b><br>${ptNotes}</div>` : '';
+
+  document.getElementById('rptPreviewContent').innerHTML = `
+    <div class="rpt-brand-line">Biomedionics — Isometri Muscle Meter v4.0</div>
+    <div class="rpt-doc-title">Patient Session Report</div>
+    <div class="rpt-doc-meta">${ptType} | ${dateStr}</div>
+    <div class="rpt-info-grid">
+      <div class="rpt-info-item"><label>Patient</label><span>${ptName}</span></div>
+      <div class="rpt-info-item"><label>Age/Gender</label><span>${ptAge} / ${ptGender}</span></div>
+      <div class="rpt-info-item"><label>MR/ID</label><span>${ptMR}</span></div>
+      <div class="rpt-info-item"><label>Diagnosis</label><span>${ptDiag}</span></div>
+      <div class="rpt-info-item"><label>Muscle</label><span>${ptMuscle}</span></div>
+      <div class="rpt-info-item"><label>Clinician</label><span>${ptClin}</span></div>
+    </div>
+    <div class="rpt-params-title">7-Parameter Results</div>
+    <div class="rpt-params-grid">${paramCards}</div>
+    ${notesRow}
+    <div class="rpt-gen-footer">Generated by Biomedionics | biomedionics.live</div>
+  `;
+}
+
+function rptPrintPDF() {
+  buildReportPreview();
+  const content = document.getElementById('rptPreviewContent').innerHTML;
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Patient Session Report</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 0; padding: 30px; color: #0f172a; }
+    .rpt-brand-line { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; color: #1a56db; text-transform: uppercase; margin-bottom: 2px; }
+    .rpt-doc-title { font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 2px; }
+    .rpt-doc-meta { font-size: 12px; color: #64748b; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 2px solid #1a56db; }
+    .rpt-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .rpt-info-item label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; display: block; margin-bottom: 2px; }
+    .rpt-info-item span { font-size: 13px; font-weight: 600; color: #0f172a; }
+    .rpt-params-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #374151; margin-bottom: 10px; }
+    .rpt-params-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+    .rpt-param-box { border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 8px; text-align: center; background: #fafafa; }
+    .rpt-param-num { font-size: 10px; font-weight: 700; color: #94a3b8; margin-bottom: 4px; }
+    .rpt-param-bar { height: 3px; border-radius: 2px; margin: 4px auto; width: 60%; }
+    .rpt-param-val { font-size: 14px; font-weight: 800; color: #0f172a; margin: 2px 0; }
+    .rpt-param-unit { font-size: 10px; color: #94a3b8; }
+    .rpt-gen-footer { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 12px; }
+    @media print { body { padding: 20px; } }
+  </style></head><body>${content}</body></html>`);
+  win.document.close();
+  setTimeout(() => { win.print(); }, 400);
+}
+
+function rptDownload() {
+  buildReportPreview();
+  const content = document.getElementById('rptPreviewContent').innerHTML;
+  const ptName = document.getElementById('rPtName').value.trim().replace(/\s+/g, '_') || 'Patient';
+  const dateTag = new Date().toISOString().slice(0,10);
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Session Report - ${ptName}</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 0; padding: 40px; max-width: 700px; margin: 0 auto; color: #0f172a; }
+    .rpt-brand-line { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; color: #1a56db; text-transform: uppercase; margin-bottom: 2px; }
+    .rpt-doc-title { font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 2px; }
+    .rpt-doc-meta { font-size: 13px; color: #64748b; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 2px solid #1a56db; }
+    .rpt-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+    .rpt-info-item label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; display: block; margin-bottom: 2px; }
+    .rpt-info-item span { font-size: 14px; font-weight: 600; color: #0f172a; }
+    .rpt-params-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #374151; margin-bottom: 12px; }
+    .rpt-params-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+    .rpt-param-box { border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 10px; text-align: center; background: #fafafa; }
+    .rpt-param-num { font-size: 10px; font-weight: 700; color: #94a3b8; margin-bottom: 4px; }
+    .rpt-param-bar { height: 3px; border-radius: 2px; margin: 4px auto; width: 60%; }
+    .rpt-param-val { font-size: 16px; font-weight: 800; color: #0f172a; margin: 4px 0; }
+    .rpt-param-unit { font-size: 11px; color: #94a3b8; }
+    .rpt-gen-footer { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 14px; padding-top: 10px; border-top: 1px solid #f1f5f9; }
+  </style></head><body>${content}</body></html>`;
+
+  const blob = new Blob([html], { type: 'text/html' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'isometri_report_' + ptName + '_' + dateTag + '.html';
+  a.click();
+  showToast('Report downloaded!');
+
+  // Auto-save to Firebase admin panel
+  try {
+    const reportData = {
+      patientName: document.getElementById('rPtName').value.trim(),
+      age: document.getElementById('rPtAge').value.trim(),
+      gender: document.getElementById('rPtGender').value,
+      mrId: document.getElementById('rPtMR').value.trim(),
+      diagnosis: document.getElementById('rPtDiag').value.trim(),
+      muscle: document.getElementById('rPtMuscle').value,
+      clinician: document.getElementById('rPtClinician').value.trim(),
+      sessionType: document.getElementById('rPtSessionType').value,
+      notes: document.getElementById('rPtNotes').value.trim(),
+      deviceId: connectedID,
+      timestamp: Date.now(),
+      params: {
+        mvc: ws.mvc, peak: ws.peak, ttp: ws.ttp,
+        rfdMax: ws.rfdMax, fi: ws.fi, impulse: ws.impulse,
+        pctMVC: ws.pctMVC, avg: ws.avg, readings: ws.readings
+      }
+    };
+    db.ref('/reports/' + connectedID + '/' + Date.now()).set(reportData);
+  } catch(e) { /* silent fail */ }
+}
+
+// ─── END REPORT MODAL ────────────────────────────────────────
+
+window.addEventListener('beforeunload', () => { if (connected && connectedID) db.ref('/dynometer/' + connectedID + '/status').set('disconnected'); });
+</script>
+</body>
+</html>
