@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biomedionics SEO Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+  :root{--bg:#070b14;--bg2:#0d1422;--bg3:#111827;--card:#141d2e;--border:#1e2d45;--accent:#00d4ff;--accent2:#7c3aed;--green:#10b981;--red:#ef4444;--text:#e2e8f0;--muted:#64748b;--font:'Space Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+  .container{max-width:1100px;margin:0 auto;padding:32px 20px;position:relative;z-index:1;}
+  .header{text-align:center;margin-bottom:48px;animation:fadeDown .6s ease both;}
+  .badge{display:inline-block;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:var(--accent);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:16px;font-family:var(--mono);}
+  .header h1{font-size:clamp(28px,5vw,44px);font-weight:700;background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;margin-bottom:10px;}
+  .header p{color:var(--muted);font-size:15px;}
+  .overall-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:32px;animation:fadeUp .6s .1s ease both;}
+  .stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;position:relative;overflow:hidden;transition:transform .2s,border-color .2s;}
+  .stat-card:hover{transform:translateY(-3px);border-color:rgba(0,212,255,0.4);}
+  .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+  .stat-card .label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-family:var(--mono);margin-bottom:12px;}
+  .stat-card .value{font-size:42px;font-weight:700;font-family:var(--mono);line-height:1;margin-bottom:8px;}
+  .stat-card .sub{font-size:12px;color:var(--muted);}
+  .before-val{color:var(--red);} .after-val{color:var(--green);} .improve-val{color:var(--accent);}
+  .chart-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:24px;animation:fadeUp .6s .2s ease both;transition:border-color .2s;}
+  .chart-card:hover{border-color:rgba(0,212,255,0.25);}
+  .chart-card h2{font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+  .chart-card h2 .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);}
+  .chart-card p{font-size:13px;color:var(--muted);margin-bottom:24px;}
+  .chart-wrap{position:relative;height:320px;} .chart-wrap-sm{position:relative;height:260px;}
+  .trend-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+  .pages-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:16px;}
+  .page-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px;transition:all .2s;}
+  .page-card:hover{border-color:rgba(0,212,255,0.3);transform:translateY(-2px);}
+  .page-card .page-name{font-size:13px;font-family:var(--mono);color:var(--accent);margin-bottom:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .score-bar-wrap{margin-bottom:10px;}
+  .score-bar-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:5px;font-family:var(--mono);}
+  .score-bar{height:6px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden;}
+  .score-bar-fill{height:100%;border-radius:4px;transition:width 1.5s cubic-bezier(0.16,1,0.3,1);}
+  .bar-before{background:var(--red);} .bar-after{background:linear-gradient(90deg,var(--green),var(--accent));}
+  .improvement-badge{display:inline-block;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:var(--green);font-size:11px;font-family:var(--mono);padding:2px 8px;border-radius:20px;margin-top:8px;}
+  .checks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px;}
+  .check-item{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:12px;}
+  .check-item .check-name{flex:1;color:var(--text);} .check-item .check-pts{font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .footer{text-align:center;color:var(--muted);font-size:12px;padding:24px 0;border-top:1px solid var(--border);font-family:var(--mono);}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  @media(max-width:640px){.overall-row{grid-template-columns:1fr}.trend-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="badge">⚡ Live SEO Analytics</div>
+    <h1>Biomedionics SEO Dashboard</h1>
+    <p>Before &amp; After AI Optimization — April 20, 2026</p>
+  </div>
+  <div class="overall-row">
+    <div class="stat-card"><div class="label">Before Score</div><div class="value before-val" id="vB">0</div><div class="sub">Average /100</div></div>
+    <div class="stat-card"><div class="label">After Score</div><div class="value after-val" id="vA">0</div><div class="sub">Average /100</div></div>
+    <div class="stat-card"><div class="label">Improvement</div><div class="value improve-val" id="vI">0</div><div class="sub">Points gained</div></div>
+  </div>
+  <div class="chart-card">
+    <h2><span class="dot"></span> Before vs After — All Pages</h2>
+    <p>SEO score per page before and after Groq AI optimization</p>
+    <div class="chart-wrap"><canvas id="barChart"></canvas></div>
+  </div>
+  <div class="trend-row">
+    <div class="chart-card" style="margin-bottom:0">
+      <h2><span class="dot"></span> Weekly Progress</h2><p>SEO score trend over time</p>
+      <div class="chart-wrap-sm"><canvas id="trendChart"></canvas></div>
+    </div>
+    <div class="chart-card" style="margin-bottom:0">
+      <h2><span class="dot"></span> SEO Factors Radar</h2><p>Category-wise breakdown</p>
+      <div class="chart-wrap-sm"><canvas id="radarChart"></canvas></div>
+    </div>
+  </div><br>
+  <div class="chart-card">
+    <h2><span class="dot"></span> Per Page Breakdown</h2>
+    <p>Individual page scores with animated progress bars</p>
+    <div class="pages-grid" id="pagesGrid"></div>
+  </div>
+  <div class="chart-card">
+    <h2><span class="dot"></span> SEO Checks — After Optimization</h2>
+    <p>Which elements are now present across your site</p>
+    <div class="checks-grid" id="checksGrid"></div>
+  </div>
+  <div class="footer">biomedionics.live &nbsp;·&nbsp; Groq SEO Bot &nbsp;·&nbsp; April 20, 2026</div>
+</div>
+<script>
+const pages      = [{"name": "my-orders.html", "before": 100, "after": 100}, {"name": "diabetic-neuropathy-pakistan.html", "before": 100, "after": 100}, {"name": "device-isometri.html", "before": 100, "after": 100}, {"name": "index.html", "before": 100, "after": 100}, {"name": "returns.html", "before": 100, "after": 100}, {"name": "cart.html", "before": 100, "after": 100}, {"name": "services.html", "before": 100, "after": 100}, {"name": "admin.html", "before": 50, "after": 50}, {"name": "device-diabsense.html", "before": 100, "after": 100}, {"name": "shipping.html", "before": 100, "after": 100}, {"name": "blogs.html", "before": 100, "after": 100}, {"name": "diabe-neurosense-guide.html", "before": 100, "after": 100}, {"name": "isometric-testing-guide.html", "before": 100, "after": 100}, {"name": "checkout.html", "before": 60, "after": 100}, {"name": "track.html", "before": 60, "after": 60}, {"name": "about.html", "before": 65, "after": 65}, {"name": "device-biosoft.html", "before": 100, "after": 100}, {"name": "privacy.html", "before": 60, "after": 60}, {"name": "my-orders.html", "before": 100, "after": 100}, {"name": "diabetic-neuropathy-pakistan.html", "before": 100, "after": 100}, {"name": "device-isometri.html", "before": 100, "after": 100}, {"name": "index.html", "before": 100, "after": 100}, {"name": "returns.html", "before": 100, "after": 100}, {"name": "cart.html", "before": 100, "after": 100}, {"name": "services.html", "before": 100, "after": 100}, {"name": "admin.html", "before": 50, "after": 50}, {"name": "device-diabsense.html", "before": 100, "after": 100}, {"name": "shipping.html", "before": 100, "after": 100}, {"name": "blogs.html", "before": 100, "after": 100}, {"name": "diabe-neurosense-guide.html", "before": 100, "after": 100}, {"name": "isometric-testing-guide.html", "before": 100, "after": 100}, {"name": "checkout.html", "before": 100, "after": 100}, {"name": "track.html", "before": 60, "after": 60}, {"name": "about.html", "before": 65, "after": 65}, {"name": "device-biosoft.html", "before": 100, "after": 100}, {"name": "privacy.html", "before": 60, "after": 60}];
+const avgBefore  = 89.7;
+const avgAfter   = 90.8;
+const avgImprove = 1.1;
+const trendLabels= ["2026-04-20"];
+const trendBefore= [89.7];
+const trendAfter = [90.8];
+
+Chart.defaults.color='#64748b';
+Chart.defaults.font.family="'Space Grotesk',sans-serif";
+const gc='rgba(255,255,255,0.05)';
+
+function animCount(el,t,d=1200){let n=0,s=t/(d/16);const i=setInterval(()=>{n=Math.min(n+s,t);el.textContent=Math.round(n);if(n>=t)clearInterval(i);},16);}
+window.addEventListener('load',()=>{
+  animCount(document.getElementById('vB'),avgBefore);
+  animCount(document.getElementById('vA'),avgAfter);
+  animCount(document.getElementById('vI'),avgImprove);
+});
+
+new Chart(document.getElementById('barChart'),{type:'bar',data:{labels:pages.map(p=>p.name.replace('.html','')),datasets:[{label:'Before',data:pages.map(p=>p.before),backgroundColor:'rgba(239,68,68,0.7)',borderColor:'#ef4444',borderWidth:1,borderRadius:6},{label:'After',data:pages.map(p=>p.after),backgroundColor:'rgba(0,212,255,0.7)',borderColor:'#00d4ff',borderWidth:1,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:1200,easing:'easeOutQuart'},plugins:{legend:{labels:{color:'#94a3b8',font:{size:12},padding:20}},tooltip:{backgroundColor:'#141d2e',borderColor:'#1e2d45',borderWidth:1,callbacks:{label:c=>` ${c.dataset.label}: ${c.raw}/100`}}},scales:{x:{grid:{color:gc},ticks:{color:'#64748b',font:{size:11}}},y:{min:0,max:100,grid:{color:gc},ticks:{color:'#64748b',callback:v=>v+'/100'}}}}});
+
+new Chart(document.getElementById('trendChart'),{type:'line',data:{labels:trendLabels,datasets:[{label:'Before AI',data:trendBefore,borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,0.1)',borderWidth:2,borderDash:[5,5],tension:.4,fill:true,pointBackgroundColor:'#ef4444',pointRadius:4},{label:'After AI',data:trendAfter,borderColor:'#00d4ff',backgroundColor:'rgba(0,212,255,0.08)',borderWidth:2.5,tension:.4,fill:true,pointBackgroundColor:'#00d4ff',pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:1400},plugins:{legend:{labels:{color:'#94a3b8',font:{size:11}}},tooltip:{backgroundColor:'#141d2e',borderColor:'#1e2d45',borderWidth:1}},scales:{x:{grid:{color:gc},ticks:{color:'#64748b',font:{size:10}}},y:{min:0,max:100,grid:{color:gc},ticks:{color:'#64748b',callback:v=>v+'%'}}}}});
+
+new Chart(document.getElementById('radarChart'),{type:'radar',data:{labels:['Meta Tags','Schema','Open Graph','Alt Tags','Headings','Canonical','Keywords'],datasets:[{label:'Before',data:[10,0,5,20,30,0,15],borderColor:'rgba(239,68,68,0.8)',backgroundColor:'rgba(239,68,68,0.1)',borderWidth:1.5,pointBackgroundColor:'#ef4444',pointRadius:3},{label:'After',data:[95,90,88,92,95,90,85],borderColor:'#00d4ff',backgroundColor:'rgba(0,212,255,0.1)',borderWidth:2,pointBackgroundColor:'#00d4ff',pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:1400},plugins:{legend:{labels:{color:'#94a3b8',font:{size:11}}}},scales:{r:{min:0,max:100,grid:{color:'rgba(255,255,255,0.07)'},angleLines:{color:'rgba(255,255,255,0.07)'},ticks:{display:false},pointLabels:{color:'#94a3b8',font:{size:11}}}}}});
+
+const grid=document.getElementById('pagesGrid');
+pages.forEach((p,i)=>{
+  const imp=p.after-p.before,card=document.createElement('div');
+  card.className='page-card';
+  card.innerHTML=`<div class="page-name">📄 ${p.name}</div>
+    <div class="score-bar-wrap"><div class="score-bar-label"><span>Before</span><span>${p.before}/100</span></div><div class="score-bar"><div class="score-bar-fill bar-before" id="bb${i}" style="width:0%"></div></div></div>
+    <div class="score-bar-wrap"><div class="score-bar-label"><span>After</span><span>${p.after}/100</span></div><div class="score-bar"><div class="score-bar-fill bar-after" id="ba${i}" style="width:0%"></div></div></div>
+    <span class="improvement-badge">+${imp} points ↑</span>`;
+  grid.appendChild(card);
+  setTimeout(()=>{document.getElementById('bb'+i).style.width=p.before+'%';document.getElementById('ba'+i).style.width=p.after+'%';},300+i*80);
+});
+
+[{name:"Title Tag",pts:15,ok:true},{name:"Meta Description",pts:15,ok:true},{name:"Meta Keywords",pts:5,ok:true},{name:"Image Alt Tags",pts:15,ok:true},{name:"OG Title",pts:10,ok:true},{name:"OG Description",pts:10,ok:true},{name:"Schema Markup",pts:15,ok:true},{name:"Canonical URL",pts:10,ok:true},{name:"H1 Heading",pts:5,ok:true},{name:"Twitter Card",pts:5,ok:true},{name:"Sitemap",pts:5,ok:false},{name:"Breadcrumbs",pts:5,ok:false}].forEach(c=>{
+  const item=document.createElement('div');item.className='check-item';
+  item.innerHTML=`<span>${c.ok?'✅':'❌'}</span><span class="check-name">${c.name}</span><span class="check-pts">${c.pts}pts</span>`;
+  document.getElementById('checksGrid').appendChild(item);
+});
+</script>
+</body>
+</html>

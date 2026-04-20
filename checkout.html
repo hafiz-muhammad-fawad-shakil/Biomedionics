@@ -1,222 +1,264 @@
 <!DOCTYPE html>
 <html lang="en-PK">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<link rel="icon" href="favicon.ico"/>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
-<script src="js/firebase-config.js"></script>
-<link rel="stylesheet" href="css/main.css"/>
-<title>Checkout | Biomedionics Pakistan</title>
-<meta name="description" content="Secure checkout for Biomedionics medical devices. Cash on Delivery available across Pakistan."/>
-<link rel="canonical" href="https://biomedionics.live/checkout.html"/>
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5S9GW5JE67"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-5S9GW5JE67');
-</script>
-
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <link rel="icon" href="favicon.ico"/>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <link rel="stylesheet" href="css/main.css"/>
+  <title>Medical Devices Pakistan | Secure Checkout</title>
+  <meta name="description" content="Secure checkout for medical devices in Pakistan. Cash on Delivery available across Pakistan for BioSoft, Diabe-Neurosense, and Isometri Muscle Meter."/>
+  <meta name="keywords" content="medical devices Pakistan, Diabe-Neurosense, isometric muscle meter, BioSoft, neuropathy diagnostics, physiotherapy equipment Pakistan, medical equipment Narowal, clinical devices Punjab Pakistan"/>
+  <link rel="canonical" href="https://biomedionics.live/checkout.html"/>
+  <meta property="og:title" content="Medical Devices Pakistan | Secure Checkout"/>
+  <meta property="og:description" content="Secure checkout for medical devices in Pakistan. Cash on Delivery available across Pakistan for BioSoft, Diabe-Neurosense, and Isometri Muscle Meter."/>
+  <meta property="og:image" content="https://biomedionics.live/android-chrome-192x192.png"/>
+  <meta property="og:url" content="https://biomedionics.live/checkout.html"/>
+  <meta property="og:type" content="website"/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="Medical Devices Pakistan | Secure Checkout"/>
+  <meta name="twitter:description" content="Secure checkout for medical devices in Pakistan. Cash on Delivery available across Pakistan for BioSoft, Diabe-Neurosense, and Isometri Muscle Meter."/>
+  <meta name="twitter:image" content="https://biomedionics.live/android-chrome-192x192.png"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Biomedionics",
+    "url": "https://biomedionics.live",
+    "logo": "https://biomedionics.live/android-chrome-192x192.png",
+    "sameAs": [
+      "https://www.facebook.com/biomedionics",
+      "https://www.twitter.com/biomedionics"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Biomedionics",
+    "url": "https://biomedionics.live",
+    "logo": "https://biomedionics.live/android-chrome-192x192.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Narowal - Muridke Road",
+      "addressLocality": "Narowal",
+      "addressRegion": "Punjab",
+      "postalCode": "",
+      "addressCountry": "Pakistan"
+    },
+    "telephone": "+92 347 4281701",
+    "email": "biomedionics@gmail.com"
+  }
+  </script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5S9GW5JE67"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5S9GW5JE67');
+  </script>
 </head>
 <body>
-<div class="ann">🚀 Free shipping on orders over PKR 200,000 · <a href="track.html">Track your order →</a></div>
-<nav class="nav">
-  <div class="nav-inner">
-   <a class="nav-logo" href="index.html">
-  <img src="android-chrome-192x192.png" alt="Biomedionics Icon" style="width: 32px; height: 32px; margin-right: 8px; border-radius: 6px;">
-  <span class="logo-text">Bio<span>medionics</span></span>
-</a>
-    <div class="nav-links">
-      <a class="nav-link" href="index.html">Devices</a>
-      <a class="nav-link" href="services.html">Services</a>
-      <a class="nav-link" href="blogs.html">Blog</a>
-      <a class="nav-link" href="cart.html">Cart</a>
-      <a class="nav-link active" href="checkout.html">Checkout</a>
-      <a class="nav-link" href="my-orders.html">My Orders</a>
+  <div class="ann"> Free shipping on orders over PKR 200,000 · <a href="track.html">Track your order →</a></div>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <img src="android-chrome-192x192.png" alt="Biomedionics Icon - Medical Devices Pakistan" style="width: 32px; height: 32px; margin-right: 8px; border-radius: 6px;">
+        <span class="logo-text">Bio<span>medionics</span></span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">Devices</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="blogs.html">Blog</a>
+        <a class="nav-link" href="cart.html">Cart</a>
+        <a class="nav-link active" href="checkout.html">Checkout</a>
+        <a class="nav-link" href="my-orders.html">My Orders</a>
+      </div>
+      <div class="nav-right">
+        <input type="text" class="nav-search-input" placeholder="Search medical devices..." oninput="if(this.value.length>1)window.location.href='index.html#s='+encodeURIComponent(this.value)"/>
+        <a class="nav-track-btn" href="track.html"> Track</a>
+        <a class="nav-cart-btn" href="cart.html"> Cart <span class="cart-badge" id="cartBadge" style="display:none">0</span></a>
+      </div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <div class="nav-right">
-      <input type="text" class="nav-search-input" placeholder="Search devices..." oninput="if(this.value.length>1)window.location.href='index.html#s='+encodeURIComponent(this.value)"/>
-      <a class="nav-track-btn" href="track.html">📦 Track</a>
-      <a class="nav-cart-btn" href="cart.html">🛒 Cart <span class="cart-badge" id="cartBadge" style="display:none">0</span></a>
-    </div>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+  </nav>
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <a class="nav-link" href="index.html">Devices</a>
+    <a class="nav-link" href="services.html">Services</a>
+    <a class="nav-link" href="blogs.html">Blog</a>
+    <a class="nav-link" href="cart.html">Cart</a>
+    <a class="nav-link active" href="checkout.html">Checkout</a>
+    <a class="nav-link" href="my-orders.html">My Orders</a>
+    <input type="text" class="nav-search-input" placeholder="Search medical devices..." oninput="if(this.value.length>1)window.location.href='index.html#s='+encodeURIComponent(this.value)" style="margin-top:8px;width:100%"/>
+    <a href="track.html" style="display:block;margin-top:8px;padding:12px 16px;background:#f8fafc;border-radius:8px;font-size:14px;font-weight:600;color:var(--text2);text-decoration:none;"> Track Order</a>
   </div>
-</nav>
-<div class="nav-mobile-menu" id="navMobileMenu">
-  <a class="nav-link" href="index.html">Devices</a>
-  <a class="nav-link" href="services.html">Services</a>
-  <a class="nav-link" href="blogs.html">Blog</a>
-  <a class="nav-link" href="cart.html">Cart</a>
-  <a class="nav-link active" href="checkout.html">Checkout</a>
-  <a class="nav-link" href="my-orders.html">My Orders</a>
-  <input type="text" class="nav-search-input" placeholder="Search devices..." oninput="if(this.value.length>1)window.location.href='index.html#s='+encodeURIComponent(this.value)" style="margin-top:8px;width:100%"/>
-  <a href="track.html" style="display:block;margin-top:8px;padding:12px 16px;background:#f8fafc;border-radius:8px;font-size:14px;font-weight:600;color:var(--text2);text-decoration:none;">📦 Track Order</a>
-</div><div style="max-width:1100px;margin:0 auto;padding:32px 20px">
-  <div class="back-btn" onclick="history.back()">← Back to Cart</div>
-  <h1 style="font-size:24px;font-weight:800;color:var(--navy);margin-bottom:24px">Secure Checkout</h1>
-  <div style="display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start;" class="checkout-grid-wrap" id="checkoutGrid">
-    <!-- Left: Form -->
-    <div>
-      <div class="form-section">
-        <div class="form-section-title"><span class="form-section-num">1</span> Contact & Shipping</div>
-        <div class="form-row2">
-          <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="fName" placeholder="Dr. Ahmed Khan"/></div>
-          <div class="form-group"><label class="form-label">Email *</label><input type="email" class="form-input" id="fEmail" placeholder="your@email.com"/></div>
+  <div style="max-width:1100px;margin:0 auto;padding:32px 20px">
+    <div class="back-btn" onclick="history.back()"> Back to Cart</div>
+    <h1 style="font-size:24px;font-weight:800;color:var(--navy);margin-bottom:24px">Secure Checkout for Medical Devices in Pakistan</h1>
+    <div style="display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start;" class="checkout-grid-wrap" id="checkoutGrid">
+      <!-- Left: Form -->
+      <div>
+        <div class="form-section">
+          <div class="form-section-title"><span class="form-section-num">1</span> Contact & Shipping</div>
+          <div class="form-row2">
+            <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="fName" placeholder="Dr. Ahmed Khan"/></div>
+            <div class="form-group"><label class="form-label">Email *</label><input type="email" class="form-input" id="fEmail" placeholder="your@email.com"/></div>
+          </div>
+          <div class="form-row2">
+            <div class="form-group"><label class="form-label">Phone *</label><input class="form-input" id="fPhone" placeholder="+92 3XX XXXXXXX"/></div>
+            <div class="form-group"><label class="form-label">Hospital / Clinic</label><input class="form-input" id="fHospital" placeholder="Optional"/></div>
+          </div>
+          <div class="form-group"><label class="form-label">Street Address *</label><input class="form-input" id="fAddr" placeholder="House/Street/Area"/></div>
+          <div class="form-row2">
+            <div class="form-group"><label class="form-label">City *</label><input class="form-input" id="fCity" placeholder="Lahore"/></div>
+            <div class="form-group"><label class="form-label">Country</label>
+              <select class="form-input" id="fCountry">
+                <option value="Pakistan" selected> Pakistan</option>
+                <option value="UAE">UAE</option>
+                <option value="Saudi Arabia">Saudi Arabia</option>
+                <option value="UK">United Kingdom</option>
+                <option value="USA">United States</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
         </div>
-        <div class="form-row2">
-          <div class="form-group"><label class="form-label">Phone *</label><input class="form-input" id="fPhone" placeholder="+92 3XX XXXXXXX"/></div>
-          <div class="form-group"><label class="form-label">Hospital / Clinic</label><input class="form-input" id="fHospital" placeholder="Optional"/></div>
+        <div class="form-section">
+          <div class="form-section-title"><span class="form-section-num">2</span> Payment Method</div>
+          <div style="background:#eff6ff;border:2px solid var(--blue);border-radius:12px;padding:16px;display:flex;align-items:center;gap:14px">
+            <div style="font-size:28px"> Cash on Delivery</div>
+            <div><div style="font-size:15px">Pay when your order arrives — Pakistan only</div></div>
+            <div style="margin-left:auto;color:var(--blue);font-size:20px">✓</div>
+          </div>
         </div>
-        <div class="form-group"><label class="form-label">Street Address *</label><input class="form-input" id="fAddr" placeholder="House/Street/Area"/></div>
-        <div class="form-row2">
-          <div class="form-group"><label class="form-label">City *</label><input class="form-input" id="fCity" placeholder="Lahore"/></div>
-          <div class="form-group"><label class="form-label">Country</label>
-            <select class="form-input" id="fCountry">
-              <option value="Pakistan" selected>🇵🇰 Pakistan</option>
-              <option value="UAE">🇦🇪 UAE</option>
-              <option value="Saudi Arabia">🇸🇦 Saudi Arabia</option>
-              <option value="UK">🇬🇧 United Kingdom</option>
-              <option value="USA">🇺🇸 United States</option>
-              <option value="Other">🌍 Other</option>
-            </select>
+        <div class="form-section">
+          <div class="form-section-title"><span class="form-section-num">3</span> Order Note</div>
+          <textarea class="form-input" id="fNote" placeholder="Special instructions or notes..." style="width:100%;min-height:80px;resize:vertical"></textarea>
+        </div>
+        <button onclick="placeOrder()" class="btn-checkout" style="width:100%;font-size:16px;padding:16px"> Place Order — Cash on Delivery</button>
+      </div>
+      <!-- Right: Summary -->
+      <div>
+        <div class="cart-summary-box" style="position:sticky;top:80px">
+          <div class="cs-title">Order Summary</div>
+          <div id="coItems"></div>
+          <div class="cs-row"><span>Subtotal</span><span id="coSub">PKR 0</span></div>
+          <div class="cs-row"><span>Shipping</span><span style="color:var(--green)">Free</span></div>
+          <div class="cs-row cs-total"><span>Total</span><span id="coTotal">PKR 0</span></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:12px;padding:10px;background:var(--off);border-radius:8px;line-height:1.6"> Secure checkout · 7-day returns · Free shipping over PKR 200,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Success Modal -->
+  <div id="mSuccess" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:20px">
+    <div style="background:#fff;border-radius:16px;padding:40px;max-width:440px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.2)">
+      <div style="font-size:52px;margin-bottom:16px"> Order Placed!</div>
+      <h2 style="font-size:22px;font-weight:800;color:var(--navy);margin-bottom:8px">Order Confirmation</h2>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:16px">Your order has been confirmed. Save your Order ID!</p>
+      <div style="background:var(--off);border-radius:8px;padding:16px;margin-bottom:20px">
+        <div style="font-size:12px;color:var(--text2);margin-bottom:4px">Your Order ID</div>
+        <div style="font-size:22px;font-weight:800;color:var(--navy);letter-spacing:2px" id="successOrderId">—</div>
+      </div>
+      <a href="track.html" style="display:block;background:var(--blue);color:#fff;padding:13px;border-radius:8px;font-weight:700;font-size:14px;margin-bottom:10px"> Track My Order</a>
+      <a href="index.html" style="display:block;color:var(--text2);font-size:13px">Continue Shopping →</a>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">Biomedionics</div>
+          <p>Advanced medical devices engineered for precision diagnostics and real-time clinical monitoring. Trusted by healthcare professionals across Pakistan.</p>
+          <div class="footer-contact">
+            <a href="https://maps.google.com/?q=Narowal+Muridke+Road+Punjab+Pakistan" target="_blank" rel="noopener"> Narowal - Muridke Road, Punjab, Pakistan</a>
+            <a href="mailto:biomedionics@gmail.com"> biomedionics@gmail.com</a>
+            <a href="tel:+923474281701"> +92 347 4281701</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Products</div>
+          <div class="footer-links">
+            <a href="device-biosoft.html">BioSoft I</a>
+            <a href="device-diabsense.html">Diabe-Neurosense</a>
+            <a href="device-isometri.html">Isometri Muscle Meter</a>
+            <a href="services.html">Repair Services</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Support</div>
+          <div class="footer-links">
+            <a href="track.html">Track Order</a>
+            <a href="my-orders.html">My Orders</a>
+            <a href="mailto:biomedionics@gmail.com">Email Support</a>
+            <a href="tel:+923474281701">Call Us</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Company</div>
+          <div class="footer-links">
+            <a href="about.html">About Us</a>
+            <a href="shipping.html">Shipping Policy</a>
+            <a href="returns.html">Return Policy</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="blogs.html">Blog</a>
           </div>
         </div>
       </div>
-      <div class="form-section">
-        <div class="form-section-title"><span class="form-section-num">2</span> Payment Method</div>
-        <div style="background:#eff6ff;border:2px solid var(--blue);border-radius:12px;padding:16px;display:flex;align-items:center;gap:14px">
-          <div style="font-size:28px">💵</div>
-          <div><div style="font-weight:800;color:var(--blue);font-size:15px">Cash on Delivery</div><div style="font-size:13px;color:var(--text2)">Pay when your order arrives — Pakistan only</div></div>
-          <div style="margin-left:auto;color:var(--blue);font-size:20px">✓</div>
-        </div>
-      </div>
-      <div class="form-section">
-        <div class="form-section-title"><span class="form-section-num">3</span> Order Note</div>
-        <textarea class="form-input" id="fNote" placeholder="Special instructions or notes..." style="width:100%;min-height:80px;resize:vertical"></textarea>
-      </div>
-      <button onclick="placeOrder()" class="btn-checkout" style="width:100%;font-size:16px;padding:16px">🛒 Place Order — Cash on Delivery</button>
-    </div>
-    <!-- Right: Summary -->
-    <div>
-      <div class="cart-summary-box" style="position:sticky;top:80px">
-        <div class="cs-title">Order Summary</div>
-        <div id="coItems"></div>
-        <div class="cs-row"><span>Subtotal</span><span id="coSub">PKR 0</span></div>
-        <div class="cs-row"><span>Shipping</span><span style="color:var(--green)">Free</span></div>
-        <div class="cs-row cs-total"><span>Total</span><span id="coTotal">PKR 0</span></div>
-        <div style="font-size:12px;color:var(--text2);margin-top:12px;padding:10px;background:var(--off);border-radius:8px;line-height:1.6">🔒 Secure checkout · 7-day returns · Free shipping over PKR 200,000</div>
+      <div class="footer-bottom">
+        <span> 2025 Biomedionics. All rights reserved.</span>
+        <span>Made with  in Pakistan </span>
       </div>
     </div>
-  </div>
-</div>
-<!-- Success Modal -->
-<div id="mSuccess" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:20px">
-  <div style="background:#fff;border-radius:16px;padding:40px;max-width:440px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.2)">
-    <div style="font-size:52px;margin-bottom:16px">🎉</div>
-    <h2 style="font-size:22px;font-weight:800;color:var(--navy);margin-bottom:8px">Order Placed!</h2>
-    <p style="font-size:13px;color:var(--text2);margin-bottom:16px">Your order has been confirmed. Save your Order ID!</p>
-    <div style="background:var(--off);border-radius:8px;padding:16px;margin-bottom:20px">
-      <div style="font-size:12px;color:var(--text2);margin-bottom:4px">Your Order ID</div>
-      <div style="font-size:22px;font-weight:800;color:var(--navy);letter-spacing:2px" id="successOrderId">—</div>
-    </div>
-    <a href="track.html" style="display:block;background:var(--blue);color:#fff;padding:13px;border-radius:8px;font-weight:700;font-size:14px;margin-bottom:10px">📦 Track My Order</a>
-    <a href="index.html" style="display:block;color:var(--text2);font-size:13px">Continue Shopping →</a>
-  </div>
-</div>
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">Biomedionics</div>
-        <p>Advanced medical devices engineered for precision diagnostics and real-time clinical monitoring. Trusted by healthcare professionals across Pakistan.</p>
-        <div class="footer-contact">
-          <a href="https://maps.google.com/?q=Narowal+Muridke+Road+Punjab+Pakistan" target="_blank" rel="noopener">📍 Narowal - Muridke Road, Punjab, Pakistan</a>
-          <a href="mailto:biomedionics@gmail.com">📧 biomedionics@gmail.com</a>
-          <a href="tel:+923474281701">📞 +92 347 4281701</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Products</div>
-        <div class="footer-links">
-          <a href="device-biosoft.html">BioSoft I</a>
-          <a href="device-diabsense.html">Diabe-Neurosense</a>
-          <a href="device-isometri.html">Isometri Muscle Meter</a>
-          <a href="services.html">Repair Services</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Support</div>
-        <div class="footer-links">
-          <a href="track.html">Track Order</a>
-          <a href="my-orders.html">My Orders</a>
-          <a href="mailto:biomedionics@gmail.com">Email Support</a>
-          <a href="tel:+923474281701">Call Us</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Company</div>
-        <div class="footer-links">
-          <a href="about.html">About Us</a>
-          <a href="shipping.html">Shipping Policy</a>
-          <a href="returns.html">Return Policy</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="blogs.html">Blog</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Biomedionics. All rights reserved.</span>
-      <span>Made with ❤️ in Pakistan 🇵🇰</span>
-    </div>
-  </div>
-</footer>
-<script src="js/shared.js"></script>
-<script>
-function renderCheckout(){
-  var cart=getCart();
-  var sub=cart.reduce(function(s,i){return s+i.pricePKR*i.qty;},0);
-  var el=document.getElementById('coItems');
-  el.innerHTML=cart.map(function(i){return '<div class="cs-row"><span>'+i.name+' x'+i.qty+'</span><span>PKR '+(i.pricePKR*i.qty).toLocaleString()+'</span></div>';}).join('');
-  document.getElementById('coSub').textContent='PKR '+sub.toLocaleString();
-  document.getElementById('coTotal').textContent='PKR '+sub.toLocaleString();
-}
-async function placeOrder(){
-  var cart=getCart();
-  if(!cart.length){showToast('Cart is empty!');window.location.href='index.html';return;}
-  var name=document.getElementById('fName').value.trim();
-  var email=document.getElementById('fEmail').value.trim();
-  var phone=document.getElementById('fPhone').value.trim();
-  var addr=document.getElementById('fAddr').value.trim();
-  var city=document.getElementById('fCity').value.trim();
-  if(!name||!email||!phone||!addr||!city){showToast('Please fill all required fields!');return;}
-  showSpinner('Placing Order...','Processing securely...');
-  var sub=cart.reduce(function(s,i){return s+i.pricePKR*i.qty;},0);
-  var orderId='BIO-'+Math.random().toString(36).substr(2,6).toUpperCase();
-  var now=Date.now();
-  var order={
-    orderID:orderId,id:orderId,
-    orderDate:new Date(now).toLocaleString('en-PK',{timeZone:'Asia/Karachi',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}),
-    orderTimestamp:now,createdAt:now,
-    status:'pending',
-    customer:{name,email,phone,address:addr,city,country:document.getElementById('fCountry').value,hospital:document.getElementById('fHospital').value.trim(),note:document.getElementById('fNote').value.trim()},
-    items:cart.map(function(i){return {id:i.id,name:i.name,qty:i.qty,pricePKR:i.pricePKR,subtotalPKR:i.pricePKR*i.qty};}) ,
-    payment:{method:'cod',subtotal:sub,tax:0,total:sub,currency:'PKR'},
-    name,email,phone,total:sub
-  };
-  await db.ref('/orders/'+orderId).set(order);
-  hideSpinner();
-  saveCart([]);
-  document.getElementById('successOrderId').textContent=orderId;
-  document.getElementById('mSuccess').style.display='flex';
-}
-renderCheckout();
-updateCartBadge();
-</script>
+  </footer>
+  <script src="js/shared.js"></script>
+  <script>
+  function renderCheckout(){
+    var cart=getCart();
+    var sub=cart.reduce(function(s,i){return s+i.pricePKR*i.qty;},0);
+    var el=document.getElementById('coItems');
+    el.innerHTML=cart.map(function(i){return '<div class="cs-row"><span>'+i.name+' x'+i.qty+'</span><span>PKR '+(i.pricePKR*i.qty).toLocaleString()+'</span></div>';}).join('');
+    document.getElementById('coSub').textContent='PKR '+sub.toLocaleString();
+    document.getElementById('coTotal').textContent='PKR '+sub.toLocaleString();
+  }
+  async function placeOrder(){
+    var cart=getCart();
+    if(!cart.length){showToast('Cart is empty!');window.location.href='index.html';return;}
+    var name=document.getElementById('fName').value.trim();
+    var email=document.getElementById('fEmail').value.trim();
+    var phone=document.getElementById('fPhone').value.trim();
+    var addr=document.getElementById('fAddr').value.trim();
+    var city=document.getElementById('fCity').value.trim();
+    if(!name||!email||!phone||!addr||!city){showToast('Please fill all required fields!');return;}
+    showSpinner('Placing Order...','Processing securely...');
+    var sub=cart.reduce(function(s,i){return s+i.pricePKR*i.qty;},0);
+    var orderId='BIO-'+Math.random().toString(36).substr(2,6).toUpperCase();
+    var now=Date.now();
+    var order={
+      orderID:orderId,id:orderId,
+      orderDate:new Date(now).toLocaleString('en-PK',{timeZone:'Asia/Karachi',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}),
+      orderTimestamp:now,createdAt:now,
+      status:'pending',
+      customer:{name,email,phone,address:addr,city,country:document.getElementById('fCountry').value,hospital:document.getElementById('fHospital').value.trim(),note:document.getElementById('fNote').value.trim()},
+      items:cart.map(function(i){return {id:i.id,name:i.name,qty:i.qty,pricePKR:i.pricePKR,subtotalPKR:i.pricePKR*i.qty};}) ,
+      payment:{method:'cod',subtotal:sub,tax:0,total:sub,currency:'PKR'},
+      name,email,phone,total:sub
+    };
+    await db.ref('/orders/'+orderId).set(order);
+    hideSpinner();
+    saveCart([]);
+    document.getElementById('successOrderId').textContent=orderId;
+    document.getElementById('mSuccess').style.display='flex';
+  }
+  renderCheckout();
+  updateCartBadge();
+  </script>
 </body>
 </html>
