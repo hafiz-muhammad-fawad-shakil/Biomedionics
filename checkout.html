@@ -54,6 +54,19 @@
     "email": "biomedionics@gmail.com"
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Medical Devices Checkout",
+    "description": "Secure checkout for medical devices in Pakistan",
+    "provider": {
+      "@type": "Organization",
+      "name": "Biomedionics",
+      "url": "https://biomedionics.live"
+    }
+  }
+  </script>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5S9GW5JE67"></script>
   <script>
@@ -106,7 +119,7 @@
       <!-- Left: Form -->
       <div>
         <div class="form-section">
-          <div class="form-section-title"><span class="form-section-num">1</span> Contact & Shipping</div>
+          <h2 style="font-size:18px;font-weight:600;color:var(--navy);margin-bottom:12px">Contact & Shipping</h2>
           <div class="form-row2">
             <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="fName" placeholder="Dr. Ahmed Khan"/></div>
             <div class="form-group"><label class="form-label">Email *</label><input type="email" class="form-input" id="fEmail" placeholder="your@email.com"/></div>
@@ -131,7 +144,7 @@
           </div>
         </div>
         <div class="form-section">
-          <div class="form-section-title"><span class="form-section-num">2</span> Payment Method</div>
+          <h2 style="font-size:18px;font-weight:600;color:var(--navy);margin-bottom:12px">Payment Method</h2>
           <div style="background:#eff6ff;border:2px solid var(--blue);border-radius:12px;padding:16px;display:flex;align-items:center;gap:14px">
             <div style="font-size:28px"> Cash on Delivery</div>
             <div><div style="font-size:15px">Pay when your order arrives — Pakistan only</div></div>
@@ -139,7 +152,7 @@
           </div>
         </div>
         <div class="form-section">
-          <div class="form-section-title"><span class="form-section-num">3</span> Order Note</div>
+          <h2 style="font-size:18px;font-weight:600;color:var(--navy);margin-bottom:12px">Order Note</h2>
           <textarea class="form-input" id="fNote" placeholder="Special instructions or notes..." style="width:100%;min-height:80px;resize:vertical"></textarea>
         </div>
         <button onclick="placeOrder()" class="btn-checkout" style="width:100%;font-size:16px;padding:16px"> Place Order — Cash on Delivery</button>
@@ -147,7 +160,7 @@
       <!-- Right: Summary -->
       <div>
         <div class="cart-summary-box" style="position:sticky;top:80px">
-          <div class="cs-title">Order Summary</div>
+          <h2 style="font-size:18px;font-weight:600;color:var(--navy);margin-bottom:12px">Order Summary</h2>
           <div id="coItems"></div>
           <div class="cs-row"><span>Subtotal</span><span id="coSub">PKR 0</span></div>
           <div class="cs-row"><span>Shipping</span><span style="color:var(--green)">Free</span></div>
