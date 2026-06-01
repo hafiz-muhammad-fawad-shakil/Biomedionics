@@ -9,18 +9,18 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
   <script src="js/firebase-config.js"></script>
   <link rel="stylesheet" href="css/main.css"/>
-  <title>Track Medical Devices Order | Biomedionics Pakistan</title>
-  <meta name="description" content="Track your medical device order from Biomedionics Pakistan. Get real-time delivery status of BioSoft, Diabe-Neurosense, and Isometri Muscle Meter devices"/>
+  <title>Medical Devices Order Tracking | Biomedionics Pakistan</title>
+  <meta name="description" content="Track medical devices order from Biomedionics Pakistan. Get real-time delivery status of BioSoft, Diabe-Neurosense, and Isometri Muscle Meter devices"/>
   <meta name="keywords" content="medical devices Pakistan, Diabe-Neurosense, isometric muscle meter, BioSoft, neuropathy diagnostics, physiotherapy equipment Pakistan, medical equipment Narowal, clinical devices Punjab Pakistan"/>
   <link rel="canonical" href="https://biomedionics.live/track.html"/>
-  <meta property="og:title" content="Track Medical Devices Order | Biomedionics Pakistan"/>
-  <meta property="og:description" content="Track your medical device order from Biomedionics Pakistan. Get real-time delivery status of BioSoft, Diabe-Neurosense, and Isometri Muscle Meter devices"/>
+  <meta property="og:title" content="Medical Devices Order Tracking | Biomedionics Pakistan"/>
+  <meta property="og:description" content="Track medical devices order from Biomedionics Pakistan. Get real-time delivery status of BioSoft, Diabe-Neurosense, and Isometri Muscle Meter devices"/>
   <meta property="og:image" content="https://biomedionics.live/android-chrome-192x192.png"/>
   <meta property="og:url" content="https://biomedionics.live/track.html"/>
   <meta property="og:type" content="website"/>
   <meta name="twitter:card" content="summary"/>
-  <meta name="twitter:title" content="Track Medical Devices Order | Biomedionics Pakistan"/>
-  <meta name="twitter:description" content="Track your medical device order from Biomedionics Pakistan. Get real-time delivery status of BioSoft, Diabe-Neurosense, and Isometri Muscle Meter devices"/>
+  <meta name="twitter:title" content="Medical Devices Order Tracking | Biomedionics Pakistan"/>
+  <meta name="twitter:description" content="Track medical devices order from Biomedionics Pakistan. Get real-time delivery status of BioSoft, Diabe-Neurosense, and Isometri Muscle Meter devices"/>
   <meta name="twitter:image" content="https://biomedionics.live/android-chrome-192x192.png"/>
   <script type="application/ld+json">
   {
@@ -33,7 +33,17 @@
       "https://maps.google.com/?q=Narowal+Muridke+Road+Punjab+Pakistan",
       "https://www.facebook.com/biomedionics",
       "https://www.twitter.com/biomedionics"
-    ]
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Narowal - Muridke Road",
+      "addressLocality": "Narowal",
+      "addressRegion": "Punjab",
+      "postalCode": "",
+      "addressCountry": "Pakistan"
+    },
+    "telephone": "+92 347 4281701",
+    "email": "biomedionics@gmail.com"
   }
   </script>
   <!-- Google Analytics -->
@@ -171,6 +181,26 @@
   // Auto-search from URL
   var hash=(window.location.hash||'').replace('#','');
   if(hash&&hash.startsWith('track-')){document.getElementById('trackInput').value=decodeURIComponent(hash.replace('track-',''));doTrack();}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://biomedionics.live"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Track Order",
+        "item": "https://biomedionics.live/track.html"
+      }
+    ]
+  }
   </script>
 </body>
 </html>
