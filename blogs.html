@@ -162,7 +162,8 @@
     <a href="track.html" style="display:block;margin-top:8px;padding:12px 16px;background:#f8fafc;border-radius:4px;font-size:14px;font-weight:600;color:var(--text2);text-decoration:none;"> Track Order</a>
   </div><!-- HERO -->
   <h1>Medical Devices Pakistan</h1>
-  <p>Discover the latest medical devices in Pakistan, including BioSoft I, Diabe-Neurosense, and Isometri Muscle Meter. Learn more about our innovative products and services at Biomedionics.</p>
+  <h2>Discover the latest medical devices in Pakistan, including BioSoft I, Diabe-Neurosense, and Isometri Muscle Meter.</h2>
+  <h3>Learn more about our innovative products and services at Biomedionics.</h3>
   <!-- CONTENT -->
   <div class="blogs-inner">
     <!-- Category Nav -->
@@ -369,7 +370,7 @@
       var authors = a.authors || a.author || 'Biomedionics';
       var date = a.publishDate || (a.createdAt ? new Date(a.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '');
       var vol = a.volume ? 'Vol. ' + a.volume + (a.issue ? ', No.' + a.issue : '') + (a.year ? ' (' + a.year + ')' : '') : '';
-      var hasPDF = !!(a.pdfBase64 || a.pdfUrl);
+      var hasPDF = !!(a.pdfUrl);
       var h = '';
 
       h += '<div class="art-jheader">';
